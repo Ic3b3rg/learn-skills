@@ -1,0 +1,21 @@
+{
+  "name": "ic3b3rg-learn-skills",
+  "owner": {
+    "name": "TheCodingMan",
+    "email": "s.ceccarini94@gmail.com",
+    "url": "https://github.com/Ic3b3rg"
+  },
+  "metadata": {
+    "description": "Pedagogical methodologies (Feynman, active recall, elaboration, Socratic, learn-by-doing, Zettelkasten, Anki) packaged as agent skills — the anti-cognitive-surrender layer that closes the comprehension gap an LLM leaves behind."
+  },
+  "plugins": [
+    {
+      "name": "learn-skills",
+      "source": {
+        "source": "github",
+        "repo": "Ic3b3rg/learn-skills"
+      },
+      "description": "Evidence-backed pedagogical methodologies as agent skills. Sits next to /spec, /plan, /build skill sets — covers how to learn what was built, not how to build it."
+    }
+  ]
+}
