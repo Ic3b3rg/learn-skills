@@ -1,9 +1,9 @@
 ---
-name: active-recall
-description: Forces the user to retrieve knowledge from memory before consulting any source, then verifies what they produced against the real artefact (code, tests, official documentation). Use when the user wants to test what they have actually learned about a topic or a piece of code, to consolidate knowledge after a learning session, after a few days have passed since they last touched a subject, or anytime they say "let me see if I remember", "test my recall", "let's check what I retained", "active-recall this".
+name: quiz-me
+description: Forces the user to retrieve knowledge from memory before consulting any source, then verifies what they produced against the real artefact (code, tests, official documentation). Use when the user wants to test what they have actually learned about a topic or a piece of code, to consolidate knowledge after a learning session, after a few days have passed since they last touched a subject, or anytime they say "let me see if I remember", "test my recall", or "let's check what I retained".
 ---
 
-# Active Recall
+# Quiz Me
 
 > Speak to the user in their language; these instructions are in English for the agent.
 
@@ -12,7 +12,7 @@ The user retrieves what they know **without looking** at code, notes, or docs fi
 ## Quick start
 
 ```
-User: /active-recall src/auth/session.ts
+User: /quiz-me src/auth/session.ts
 Agent: Close the file before answering. I won't ask you anything until you confirm
        it's closed.
        Tell me from memory: what does this module export, and what does each export do?
@@ -29,7 +29,7 @@ Inspect the argument:
 - **Code-mode** — argument is a file, directory, or PR/diff the user has previously worked on. Artefact = the local code.
 - **Topic-mode** — argument is a topic name the user has previously studied. Artefact = external documentation + the project's actual stack version.
 
-If the argument refers to something the user has clearly never seen, redirect: this skill is for retrieving prior learning, not first contact. Suggest `/feynman` or `/elaboration` instead.
+If the argument refers to something the user has clearly never seen, redirect: this skill is for retrieving prior learning, not first contact. Suggest `/explain-and-check` or `/connect-to-what-you-know` instead.
 
 ### Session protocol
 
@@ -46,10 +46,10 @@ If the argument refers to something the user has clearly never seen, redirect: t
 
 When the session closes, propose one follow-up:
 
-- High rate of confident false memories → `/feynman` to rebuild the model
-- Many forgotten details, structure intact → `/anki-cards` to capture for next time
-- Structural gaps → `/elaboration` to reconnect to prior knowledge
-- Wants durable notes → `/zettelkasten`
+- High rate of confident false memories → `/explain-and-check` to rebuild the model
+- Many forgotten details, structure intact → `/flashcards` to capture for next time
+- Structural gaps → `/connect-to-what-you-know` to reconnect to prior knowledge
+- Wants durable notes → `/linked-notes`
 - Wants to confirm a level → `/assess`
 
 ## Anti-patterns

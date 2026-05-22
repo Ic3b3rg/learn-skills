@@ -1,6 +1,6 @@
 # Card format reference
 
-Detailed reference for the card and file format produced by `/anki-cards`. The SKILL.md links here when generating cards.
+Detailed reference for the card and file format produced by `/flashcards`. The SKILL.md links here when generating cards.
 
 ## Card format
 
@@ -31,7 +31,7 @@ Every card is one block in the file:
 ## File format
 
 ```md
-# Anki Cards: <topic or file>
+# Flashcards: <topic or file>
 
 Generated: YYYY-MM-DD · Stack: <stack + versions>
 

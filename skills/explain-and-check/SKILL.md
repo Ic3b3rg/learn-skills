@@ -1,9 +1,9 @@
 ---
-name: feynman
-description: Verifies the user's understanding of a piece of code or a topic by making them explain it first, then stress-testing the explanation against the real artefact (code, tests, official documentation). Use when the user wants to deepen comprehension after an LLM has written code, to consolidate understanding of a freshly-studied topic, when they say "make sure I really understand this" / "test my knowledge" / "feynman this", or after merging an LLM-written PR.
+name: explain-and-check
+description: Verifies the user's understanding of a piece of code or a topic by making them explain it first, then stress-testing the explanation against the real artefact (code, tests, official documentation). Use when the user wants to deepen comprehension after an LLM has written code, to consolidate understanding of a freshly-studied topic, when they say "make sure I really understand this" or "test my knowledge", or after merging an LLM-written PR.
 ---
 
-# Feynman
+# Explain and Check
 
 > Speak to the user in their language; these instructions are in English for the agent.
 
@@ -12,7 +12,7 @@ The user explains a concept in their own words; the agent stress-tests the expla
 ## Quick start
 
 ```
-User: /feynman src/orders/payment.ts:40-120
+User: /explain-and-check src/orders/payment.ts:40-120
 Agent: I'll judge your explanation against src/orders/payment.ts:40-120.
        Mode: code. Concrete event: a user submits a payment.
        Walk me through what happens, step by step. I won't interrupt.
@@ -53,9 +53,9 @@ If the user starts conceptually, redirect immediately: ask them to pick one conc
 
 When the session closes, propose one follow-up:
 
-- Conceptual / connective gaps → `/elaboration`
-- Factual / detail gaps → `/active-recall` (optionally `/anki-cards` to capture)
-- Wants durable notes → `/zettelkasten`
+- Conceptual / connective gaps → `/connect-to-what-you-know`
+- Factual / detail gaps → `/quiz-me` (optionally `/flashcards` to capture)
+- Wants durable notes → `/linked-notes`
 - Wants to confirm a level → `/assess`
 
 ## Anti-patterns

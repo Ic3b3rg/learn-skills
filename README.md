@@ -1,6 +1,6 @@
 # learn-skills
 
-A set of agent skills that package **evidence-backed pedagogical methodologies** — Feynman, active recall, elaboration, Socratic dialogue, learn-by-doing, Zettelkasten, Anki flashcards — as workflows applied to code.
+A set of agent skills that package **evidence-backed pedagogical methodologies** as workflows applied to code: explain-and-check, quiz-me, connect-to-what-you-know, ask-me-questions, learn-by-doing, linked-notes, flashcards.
 
 Motivation: closing the comprehension gap that opens between a human and a codebase when an LLM has done the work on the human's behalf. This is the **anti-surrender** layer that sits next to [Addy Osmani's agent-skills](https://github.com/addyosmani/agent-skills) — those cover *how to build*, this covers *how to learn what was built*.
 
@@ -11,25 +11,27 @@ Read [CONTEXT.md](CONTEXT.md) for the full design rationale, vocabulary, and dec
 ## Quickstart
 
 ```bash
-# 1. Install in Claude Code
 /plugin marketplace add Ic3b3rg/learn-skills
 /plugin install learn-skills@ic3b3rg-learn-skills
 ```
 
-Then, from any Claude Code session:
+**The easiest way to begin**: run `/start-learn`. It interviews you in a handful of questions and proposes the right skill. You always make the final call.
 
 ```
-# An LLM just wrote code for you and you want to actually understand it?
-/feynman path/to/that-file.ts
-
-# Don't know where to start?
 /start-learn
+```
 
-# Want to check what you've actually learned?
+If you already know what you need:
+
+```
+# Understand code an LLM just wrote
+/explain-and-check path/to/that-file.ts
+
+# Check what you've actually learned
 /assess "event sourcing"
 ```
 
-Three commands cover most situations. The other six skills (`active-recall`, `elaboration`, `socratic`, `learn-by-doing`, `zettelkasten`, `anki-cards`) are discoverable from `/start-learn` or from [The skill set](#the-skill-set) below.
+The other six skills (`quiz-me`, `connect-to-what-you-know`, `ask-me-questions`, `learn-by-doing`, `linked-notes`, `flashcards`) are listed below — or just run `/start-learn` and let the interview surface the right one.
 
 ---
 
@@ -46,55 +48,42 @@ LLMs often write good code. The risk isn't bad code — it's that **the human's 
 
 ## When to use these skills
 
+Not sure where to start? Run `/start-learn` — it interviews you in a handful of questions and **proposes** the right skill. You always make the final call.
+
 Two canonical scenarios:
 
 | Scenario | You just... | Reach for |
 |----------|-------------|-----------|
-| **A** — Understand code an LLM wrote | merged a PR / accepted a refactor / let an agent close a task | `/feynman <file>`, `/elaboration <file>`, `/zettelkasten <file>` |
-| **B** — Learn a topic from scratch | started studying an unfamiliar library, pattern, or domain | `/elaboration <topic>`, `/active-recall <topic>`, `/learn-by-doing <topic>` |
-
-Not sure where to start? Run `/start-learn` — it interviews you in a handful of questions and **proposes** the right skill. You always make the final call.
+| **A** — Understand code an LLM wrote | merged a PR / accepted a refactor / let an agent close a task | `/explain-and-check <file>`, `/connect-to-what-you-know <file>`, `/linked-notes <file>` |
+| **B** — Learn a topic from scratch | started studying an unfamiliar library, pattern, or domain | `/connect-to-what-you-know <topic>`, `/quiz-me <topic>`, `/learn-by-doing <topic>` |
 
 ---
 
 ## The skill set
 
-### Meta
-- **`/start-learn`** — Interview-guided entry point. Asks what you want to learn and how, then proposes a skill. Never picks for you.
-- **`/assess`** — Formative assessment. Produces a Bloom (or SOLO) level + concrete gap list + suggested next skill. **Never a 1-100 score.**
+### Find your starting point
 
-### Session methodologies (dialogic)
-- **`/feynman`** — Explain it in your own words; the agent stress-tests against the code.
-- **`/active-recall`** — Retrieve from memory before consulting the source.
-- **`/elaboration`** — Connect the new concept to existing knowledge by force of question.
-- **`/socratic`** — The agent only asks; never tells.
+| Command | What it does | When to use |
+|---|---|---|
+| `/start-learn` | Interviews you in a handful of questions and proposes the most suitable skill. Never picks for you. | Don't know which skill fits your situation. |
+| `/assess` | Produces a discrete level (Bloom or SOLO) + a concrete gap list + a suggested next skill. Never a 1-100 score. | After one or more sessions; you want to know what you actually retained. |
 
-### Generative methodologies (artefact-producing)
-- **`/learn-by-doing`** — Produces a file of exercises (solutions hidden).
-- **`/zettelkasten`** — Produces atomic, linked notes for durable knowledge.
-- **`/anki-cards`** — Produces ASCII flashcards for active-recall practice.
+### Talk-it-through skills
 
-### Editorial concepts (not skills, but used by `/assess`)
-- **Bloom's taxonomy** — remember → understand → apply → analyze → evaluate → create.
-- **SOLO taxonomy** — prestructural → unistructural → multistructural → relational → extended abstract.
+| Command | What it does | When to use |
+|---|---|---|
+| `/explain-and-check` | You explain a topic or piece of code in your own words; the agent stress-tests your explanation against the real artefact (code, tests, docs). | After an LLM wrote code you accepted; you want to verify you really understand it. |
+| `/quiz-me` | Forces you to retrieve knowledge from memory before consulting any source; the agent verifies what you produced against the real artefact. | After a learning session, or a few days later — you want to test what stuck. |
+| `/connect-to-what-you-know` | You produce analogies between the new concept and things you already know; the agent stress-tests the analogies. | Learning something unfamiliar; you want to anchor it to prior knowledge. |
+| `/ask-me-questions` | The agent only asks questions — never declares, never explains. You construct the insight yourself. | You want to reason something out rather than be told the answer. |
 
----
+### Make-something skills
 
-## Methodological roots
-
-Nothing here is invented. Each skill repackages a protocol that pedagogy has already validated:
-
-- `/feynman` ← **Feynman Technique** — Richard Feynman's habit of teaching to learn.
-- `/active-recall` ← **Testing Effect** — Roediger & Karpicke (2006); retrieval beats re-reading.
-- `/elaboration` ← **Elaborative Interrogation** — Pressley et al. (1987).
-- `/socratic` ← **Socratic Method** — Plato's dialogues.
-- `/learn-by-doing` ← **Learning by Doing** (Dewey, 1916) + **Deliberate Practice** (Ericsson).
-- `/zettelkasten` ← **Zettelkasten** — Niklas Luhmann.
-- `/anki-cards` ← **Spaced retrieval** — Ebbinghaus' forgetting curve; Leitner system.
-- Bloom (concept) ← **Bloom's Taxonomy** — Benjamin Bloom (1956).
-- SOLO (concept) ← **SOLO Taxonomy** — Biggs & Collis (1982).
-
-The contribution of this repo is the **application**: each method is reshaped to obey the [five operating principles](#the-five-operating-principles) so it stays effective when an agent is in the loop.
+| Command | What it does | When to use |
+|---|---|---|
+| `/learn-by-doing` | Produces a file of exercises (solutions hidden) tailored to the topic or code you want to drill. | You want hands-on practice on a topic you're learning. |
+| `/linked-notes` | Produces atomic markdown notes (one idea each, in your own words, cross-linked by topic) with citations to the source artefact. | You want a learning session to turn into durable, reusable knowledge. |
+| `/flashcards` | Produces ASCII flashcards (question/answer separated by a fold marker) for retrieval practice. | You want reusable retrieval material to drill facts later. |
 
 ---
 

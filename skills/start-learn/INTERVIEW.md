@@ -26,13 +26,13 @@ Use this as a guide. **Never automatic** — always present as a proposal.
 
 | Goal in Q3 | Scenario A (code) → | Scenario B (topic) → |
 |---|---|---|
-| (a) verify deep understanding | `/feynman <file>` | `/feynman <topic>` |
-| (b) retrieve prior knowledge | `/active-recall <file>` | `/active-recall <topic>` |
-| (c) anchor to existing knowledge | `/elaboration <file>` | `/elaboration <topic>` |
-| (d) capture for later | `/zettelkasten <file>` or `/anki-cards <file>` | `/zettelkasten <topic>` or `/anki-cards <topic>` |
+| (a) verify deep understanding | `/explain-and-check <file>` | `/explain-and-check <topic>` |
+| (b) retrieve prior knowledge | `/quiz-me <file>` | `/quiz-me <topic>` |
+| (c) anchor to existing knowledge | `/connect-to-what-you-know <file>` | `/connect-to-what-you-know <topic>` |
+| (d) capture for later | `/linked-notes <file>` or `/flashcards <file>` | `/linked-notes <topic>` or `/flashcards <topic>` |
 | (e) practise applying it | `/learn-by-doing <file>` | `/learn-by-doing <topic>` |
 
-If the user wants only questions (no agent answers at all), propose `/socratic` regardless of goal.
+If the user wants only questions (no agent answers at all), propose `/ask-me-questions` regardless of goal.
 
 ## Recommendation block format
 

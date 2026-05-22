@@ -73,7 +73,7 @@ Read [LEVELS.md](LEVELS.md) for the full Bloom/SOLO mappings and the exact verdi
 
 ### Choosing the suggested next skill
 
-Pick by **dominant gap**, not by lowest level: structural → `/feynman` or `/elaboration`; factual → `/active-recall` (capture with `/anki-cards`); can't apply → `/learn-by-doing`; can't connect → `/elaboration`; solid, wants record → `/zettelkasten`.
+Pick by **dominant gap**, not by lowest level: structural → `/explain-and-check` or `/connect-to-what-you-know`; factual → `/quiz-me` (capture with `/flashcards`); can't apply → `/learn-by-doing`; can't connect → `/connect-to-what-you-know`; solid, wants record → `/linked-notes`.
 
 ### Source fidelity
 
@@ -85,7 +85,7 @@ Every verification reads the real artefact; every external claim carries `file:l
 - **Don't round a level** ("Apply-ish", "halfway between Apply and Analyze") — rounding reintroduces the false-precision problem on a smaller scale; levels are discrete because the diagnostic value is in the *next* level the user can't reach, not in fractional progress.
 - **Don't skip the baseline** — without it the verdict is a snapshot with no story, and the user has no way to tell if learning happened or stagnated.
 - **Don't ask 12 questions** — cap at 6; cognitive fatigue erodes the signal, and answers from a tired user describe their tiredness, not their understanding.
-- **Don't choose the suggested-next from the lowest level reached** — the dominant *gap* determines the next skill (a user at L3 with a factual gap needs `/active-recall`, not `/elaboration`); routing by level is a shortcut that misses the texture.
+- **Don't choose the suggested-next from the lowest level reached** — the dominant *gap* determines the next skill (a user at L3 with a factual gap needs `/quiz-me`, not `/connect-to-what-you-know`); routing by level is a shortcut that misses the texture.
 - **Don't read docs / code *with* the user to "fairly verify"** — joint reading collapses the assessment into a learning session, eliminating the diagnostic value; the user keeps the source closed and the agent judges.
 
 ## Governing principles (this skill satisfies all five)

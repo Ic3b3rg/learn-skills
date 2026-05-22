@@ -6,7 +6,7 @@
     "url": "https://github.com/Ic3b3rg"
   },
   "metadata": {
-    "description": "Pedagogical methodologies (Feynman, active recall, elaboration, Socratic, learn-by-doing, Zettelkasten, Anki) packaged as agent skills — the anti-cognitive-surrender layer that closes the comprehension gap an LLM leaves behind."
+    "description": "Pedagogical methodologies (explain-and-check, quiz-me, connect-to-what-you-know, ask-me-questions, learn-by-doing, linked-notes, flashcards) packaged as agent skills — the anti-cognitive-surrender layer that closes the comprehension gap an LLM leaves behind."
   },
   "plugins": [
     {

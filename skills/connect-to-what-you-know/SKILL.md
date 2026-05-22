@@ -1,9 +1,9 @@
 ---
-name: elaboration
-description: Builds durable understanding by forcing the user to connect a new concept to things they already know — analogies to other languages, prior patterns, similar abstractions in different domains. The agent never volunteers the analogy; the user produces it, the agent stress-tests it. Use when the user is learning something new and wants to anchor it to existing knowledge, when reading code that uses an unfamiliar pattern, when a concept "isn't sticking", or anytime they say "what does this remind me of?", "connect this to what I know", "elaborate on this", "elaboration this".
+name: connect-to-what-you-know
+description: Builds durable understanding by forcing the user to connect a new concept to things they already know — analogies to other languages, prior patterns, similar abstractions in different domains. The agent never volunteers the analogy; the user produces it, the agent stress-tests it. Use when the user is learning something new and wants to anchor it to existing knowledge, when reading code that uses an unfamiliar pattern, when a concept "isn't sticking", or anytime they say "what does this remind me of?" or "connect this to what I know".
 ---
 
-# Elaboration
+# Connect to What You Know
 
 > Speak to the user in their language; these instructions are in English for the agent.
 
@@ -12,7 +12,7 @@ The user is asked to **produce the analogies and connections themselves** — "t
 ## Quick start
 
 ```
-User: /elaboration "React Server Components"
+User: /connect-to-what-you-know "React Server Components"
 Agent: Project read first. Your package.json pins React 19.0.0; I'll cite docs for
        that version.
        Now your turn: what does "React Server Components" remind you of? Anything
@@ -48,9 +48,9 @@ Inspect the argument:
 
 When the session closes, propose one follow-up:
 
-- The user wants to verify the model holds end-to-end → `/feynman`
-- Wants to capture the analogy + its break-point as a durable artefact → `/zettelkasten`
-- Wants to fix specific facts that came up → `/anki-cards`
+- The user wants to verify the model holds end-to-end → `/explain-and-check`
+- Wants to capture the analogy + its break-point as a durable artefact → `/linked-notes`
+- Wants to fix specific facts that came up → `/flashcards`
 - Wants to confirm a level → `/assess`
 
 ## Anti-patterns

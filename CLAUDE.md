@@ -1,6 +1,6 @@
 # learn-skills
 
-A set of agent skills that package **evidence-backed pedagogical methodologies** (Feynman, active recall, elaboration, Socratic, learn-by-doing, Zettelkasten, Anki) as workflows applied to code. The motivation is anti-cognitive-surrender: closing the comprehension gap that opens between a human and a codebase when an LLM has done the work on the human's behalf.
+A set of agent skills that package **evidence-backed pedagogical methodologies** (explain-and-check, quiz-me, connect-to-what-you-know, ask-me-questions, learn-by-doing, linked-notes, flashcards) as workflows applied to code. The motivation is anti-cognitive-surrender: closing the comprehension gap that opens between a human and a codebase when an LLM has done the work on the human's behalf.
 
 For the rationale, glossary, and decisions log, read [CONTEXT.md](CONTEXT.md). For the user-facing overview, read [README.md](README.md). For load-bearing decisions, read [docs/adr/](docs/adr/).
 
@@ -22,10 +22,10 @@ skills/
 ## Skills (9 total, two families + two meta)
 
 **Meta** — `start-learn`, `assess`
-**Session methodologies (dialogic)** — `feynman`, `active-recall`, `elaboration`, `socratic`
-**Generative methodologies (artefact-producing)** — `learn-by-doing`, `zettelkasten`, `anki-cards`
+**Session methodologies (dialogic)** — `explain-and-check`, `quiz-me`, `connect-to-what-you-know`, `ask-me-questions`
+**Generative methodologies (artefact-producing)** — `learn-by-doing`, `linked-notes`, `flashcards`
 
-Bloom and SOLO are **editorial concepts**, not skills. They appear in the README as a chooser and in `assess` as the output scale.
+Bloom and SOLO are **editorial concepts**, not skills. They appear internally as a chooser and in `assess` as the output scale; they are not listed in the user-facing README.
 
 ## Conventions (non-negotiable)
 
@@ -44,7 +44,7 @@ Bloom and SOLO are **editorial concepts**, not skills. They appear in the README
 - **Don't add an automatic router.** `start-learn` proposes; the user decides. Auto-routing violates principle 1.
 - **Don't write SKILL.md in Italian** (or any non-English language). Bilingualism is a runtime behaviour, not a file format.
 - **Don't promote Bloom or SOLO to invocable skills.** They are editorial concepts. See [ADR 0001](docs/adr/0001-evidence-based-core-and-editorial-concepts.md).
-- **Don't add a new skill without evidence**. Methodologies in this repo are evidence-backed (Feynman, active recall, elaboration are the empirical core). Folk pedagogy doesn't enter.
+- **Don't add a new skill without evidence**. Methodologies in this repo are evidence-backed (explain-and-check, quiz-me, connect-to-what-you-know are the empirical core). Folk pedagogy doesn't enter.
 
 ## Authoring workflow
 
