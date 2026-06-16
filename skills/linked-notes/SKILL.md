@@ -53,10 +53,16 @@ See [NOTE-FORMAT.md](NOTE-FORMAT.md) for the exact file location, frontmatter, b
 
 ### File hygiene
 
-- All notes live under `learn/notes/`. No deeper nesting.
-- Slugs are kebab-case, derived from the title.
-- If a slug collides, append a numeric suffix (`-2`, `-3`).
+- Slugs are kebab-case, derived from the title. Collisions: append `-2`, `-3`.
 - The agent never modifies an existing note's body in the same session — only adds links (with user confirmation).
+
+### Workspace mode
+
+If `CURRICULUM.md` exists in the current directory, the skill is running inside a Scenario B workspace. In workspace mode:
+- Notes go to `notes/<slug>.md` (not `learn/notes/`).
+- After each note, propose adding new terms to `reference/glossario.html`: *"This introduces the term X — add it to the glossary?"* The user decides; the agent writes the entry.
+
+If `CURRICULUM.md` is absent (legacy mode), notes go to `learn/notes/` as before.
 
 ## Anti-patterns
 

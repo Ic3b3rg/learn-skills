@@ -1,71 +1,58 @@
 ---
 name: start-learn
-description: Interview-guided entry point to the learn-skills set. Asks the user a small set of questions (intent, scenario, self-rated baseline, preferred output, assessment scale) and then PROPOSES the most suitable skill plus arguments to invoke next. The user always has the final word — the agent never auto-dispatches another skill. Use when the user is unsure which learning skill applies, says "help me start", "where do I begin", "I want to learn but don't know how", "start-learn", or when invoked without a specific methodology in mind.
+description: Entry point to learn-skills. Asks one question — what to learn — then auto-detects Scenario A (understand existing code or topic) or Scenario B (learn from scratch) and acts accordingly. Scenario A: proposes the right dialogic skill. Scenario B: creates a teaching workspace with CURRICULUM.md, HTML lessons, glossary, and resources. Use when the user says "help me start", "I want to learn", "where do I begin", "start-learn", or when invoked without a specific methodology in mind.
 ---
 
 # Start Learn
 
 > Speak to the user in their language; these instructions are in English for the agent.
 
-The user's entry point when they want to learn but don't yet know which methodology fits. The agent runs a short interview (5–7 questions max), captures a baseline self-assessment, then **proposes** the most appropriate skill + arguments. The user accepts, swaps, or refines. The agent never invokes another skill automatically.
+Single-question entry point. One ask — then act. No interview, no menu.
 
 ## Quick start
 
 ```
 User: /start-learn
-Agent: A few quick questions to point you to the right skill. I'll propose at the
-       end — you'll always have the final call.
-
-       Q1 of 6: What do you want to learn? Give me either:
-         - a file/folder/PR you want to understand (Scenario A: existing code), or
-         - a topic name (Scenario B: a concept from scratch).
+Agent: What do you want to learn?
+       (Give me a file/PR to understand, or a topic you want to learn from scratch.)
 ```
 
-After the interview, the agent prints a recommendation block (with rationale + alternatives) and waits for the user to confirm or change.
+The agent reads the answer, infers Scenario A or B, declares the assumption, and proceeds. If wrong, the user corrects in one word.
 
-## Workflows
+## Auto-detection
 
-### Session checklist (copy into your reply and tick as you go)
+Read [FLOWS.md](FLOWS.md) for the full detection logic, skill-mapping table (Scenario A), and step-by-step workspace protocol (Scenario B).
 
-```
-Interview progress:
-- [ ] Q1: object of study confirmed (file/folder/PR or topic name)
-- [ ] Q2: baseline self-rating captured (1–5)
-- [ ] Q3: goal shape selected (verify / retrieve / anchor / capture / practise)
-- [ ] Q4 (opt): resources noted
-- [ ] Q5 (opt): output preference (artefact / in-session)
-- [ ] Q6: assessment scale chosen (Bloom default, or SOLO)
-- [ ] Q7 (only if ambiguous): version anchoring confirmed
-- [ ] Recommendation block printed with 1 main + 2 alternatives
-- [ ] User confirmed / swapped / refined
-```
+Summary:
+- **Scenario A** — user mentions existing code, file, PR, or wants to deepen a topic with a codebase already in mind → propose the right dialogic skill, wait for confirmation.
+- **Scenario B** — user names a topic they want to learn from zero → create a teaching workspace, generate CURRICULUM.md, produce HTML lessons on demand.
 
-### Interview protocol
+Always declare the assumption:
+> *"Starting from the hypothesis that you're learning X from scratch — correct me if wrong."*
 
-Read [INTERVIEW.md](INTERVIEW.md) for the full 7-question bank, the recommendation block format, and the goal → skill mapping table.
+## Workspace (Scenario B only)
 
-Operating rules:
-- **One question at a time**, wait for the answer, cap at 7.
-- Required: Q1 (object), Q2 (baseline 1–5), Q3 (goal), Q6 (Bloom/SOLO scale).
-- Optional: Q4 (resources), Q5 (output preference), Q7 (only when project context is ambiguous).
-- After the interview, print the recommendation block from [INTERVIEW.md](INTERVIEW.md) with one main proposal + 1–2 alternatives. Wait for the user to confirm / swap / refine.
+See [WORKSPACE.md](WORKSPACE.md) for the full directory structure, file purposes, and workspace detection rule.
 
-### Baseline handoff
+The workspace path is chosen by the user in plain text (no tool). Access in subsequent sessions: `cd` into the folder. Detection signal for all workspace-aware skills: presence of `CURRICULUM.md` in cwd.
 
-State explicitly in the recommendation block: *"I'll pass this baseline (<1-5> on <scale>) to `/assess` when you run it later, so progress is measurable."* This makes the connection visible.
+## Baseline handoff
+
+In both scenarios, state the inferred level explicitly at the end:
+> *"I'll carry this baseline (estimated: X) to `/assess` when you run it later — progress will be measurable."*
 
 ## Anti-patterns
 
-- **Don't ask more than 7 questions** — past 7, the user starts pattern-matching to "say yes and move on", which converts the interview from anti-surrender into surrender-by-fatigue.
-- **Don't decide for the user** — even when the right skill is obvious, auto-invoking violates principle 1 and turns the entry point into a router; *always propose, always wait, always let the user type the final command*.
-- **Don't skip Q2 (baseline)** — without it, `/assess` later has no reference to compare against; progress becomes invisible and surrender becomes harder to detect.
-- **Don't recommend without showing the alternatives** — a recommendation that hides the alternatives forces the user to accept blind; seeing the trade-off is what makes the choice metacognitive.
-- **Don't ask Q7 when the project clearly pins the version** — reading manifest files is the agent's job, not the user's; making the user answer something the codebase already states is a small but real form of surrender from the agent's side.
+- **Don't ask more than one question upfront** — the whole point is zero boilerplate; if you need more context, ask *after* you've started, not before.
+- **Don't decide silently** — always declare the assumed scenario before acting; one wrong assumption costs one correction, not a lost session.
+- **Don't auto-dispatch another skill** — even when obvious, invoke nothing automatically; Scenario A ends with a proposal the user confirms; Scenario B ends with "say 'next lesson' when ready."
+- **Don't generate all lessons upfront** — one lesson at a time, on demand, so each can adapt to progress recorded in `learning-records/`.
+- **Don't invent resource URLs** — populate RESOURCES.md via web search; if unavailable, name sources without URLs and flag "verify the link."
 
 ## Governing principles (this skill satisfies all five)
 
-1. **Agent withholds** — proposes, never decides.
-2. **Student speaks first** — every choice originates from the user's answers.
-3. **Artefact is the judge** — reads project files before suggesting a version-specific topic.
-4. **Source fidelity** — version anchoring happens here, before any downstream skill runs. Policy: [../../docs/sources.md](../../docs/sources.md).
-5. **Exit is a transfer test** — the "exit" of `start-learn` is the user's explicit confirmation of the next skill to run; nothing happens silently.
+1. **Agent withholds** — proposes, never decides; lessons deliver content only when requested.
+2. **Student speaks first** — all choices (workspace path, curriculum approval, lesson request) originate from the user.
+3. **Artefact is the judge** — Scenario A: reads real code/docs before proposing. Scenario B: every lesson cites a primary source.
+4. **Source fidelity** — web search before content; no parametric knowledge asserted without citation. Policy: [../../docs/sources.md](../../docs/sources.md).
+5. **Exit is a transfer test** — Scenario A: user's confirmation of the next skill is the exit. Scenario B: each lesson ends with a practice section the user completes.

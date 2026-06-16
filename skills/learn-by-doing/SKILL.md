@@ -67,12 +67,20 @@ Read [EXERCISES.md](EXERCISES.md) for the full generation reference (exercise la
 4. **If failed, do not reveal the solution.** Ask one targeted question and point at the relevant artefact line(s). Let the user retry.
 5. **If passed, move to the next exercise** (the user decides when).
 
+### Workspace mode
+
+If `CURRICULUM.md` exists in the current directory, the skill is running inside a Scenario B workspace. In workspace mode:
+- Exercises go to `exercises/<slug>-exercises.md` (not `learn/`).
+- Read `MISSION.md` before generating: use the stated goal to shape exercise difficulty and context. A user learning chess for casual play needs different exercises than one studying openings competitively.
+- In topic-mode (Scenario B, no existing code): read `CURRICULUM.md` to identify which lesson the exercises should reinforce, then target that lesson's concepts.
+
+If `CURRICULUM.md` is absent (legacy mode), use `learn/` paths as before.
+
 ### File hygiene
 
-- Exercises files live in `learn/` at the project root.
 - One file per session (don't merge into an existing file — the user might want different sets for different goals).
-- File names: `learn/<slug>-exercises.md`, slug derived from topic or source file.
-- The `learn/` folder is the only persistent state any skill writes. Do not add metadata files, indexes, or schedules.
+- File names: `<slug>-exercises.md`, slug derived from topic or source file.
+- In legacy mode: `learn/<slug>-exercises.md`. In workspace mode: `exercises/<slug>-exercises.md`.
 
 ## Anti-patterns
 

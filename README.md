@@ -15,7 +15,7 @@ Read [CONTEXT.md](CONTEXT.md) for the full design rationale, vocabulary, and dec
 /plugin install learn-skills@ic3b3rg-learn-skills
 ```
 
-**The easiest way to begin**: run `/start-learn`. It interviews you in a handful of questions and proposes the right skill. You always make the final call.
+**The easiest way to begin**: run `/start-learn`. Tell it what you want to learn — it figures out the right approach and acts. You always make the final call.
 
 ```
 /start-learn
@@ -48,14 +48,14 @@ LLMs often write good code. The risk isn't bad code — it's that **the human's 
 
 ## When to use these skills
 
-Not sure where to start? Run `/start-learn` — it interviews you in a handful of questions and **proposes** the right skill. You always make the final call.
+Not sure where to start? Run `/start-learn` — tell it what you want to learn and it takes it from there. You always make the final call.
 
 Two canonical scenarios:
 
 | Scenario | You just... | Reach for |
 |----------|-------------|-----------|
 | **A** — Understand code an LLM wrote | merged a PR / accepted a refactor / let an agent close a task | `/explain-and-check <file>`, `/connect-to-what-you-know <file>`, `/linked-notes <file>` |
-| **B** — Learn a topic from scratch | started studying an unfamiliar library, pattern, or domain | `/connect-to-what-you-know <topic>`, `/quiz-me <topic>`, `/learn-by-doing <topic>` |
+| **B** — Learn a topic from scratch | want to learn a new language, framework, or skill from zero | `/start-learn` → creates a workspace with a curriculum, HTML lessons with quizzes, glossary, and curated resources |
 
 ---
 
@@ -65,7 +65,7 @@ Two canonical scenarios:
 
 | Command | What it does | When to use |
 |---|---|---|
-| `/start-learn` | Interviews you in a handful of questions and proposes the most suitable skill. Never picks for you. | Don't know which skill fits your situation. |
+| `/start-learn` | Asks what you want to learn, then auto-detects the approach. **Scenario A** (existing code): proposes the right dialogic skill. **Scenario B** (from scratch): creates a workspace with `CURRICULUM.md`, HTML lessons, glossary, and `RESOURCES.md`. Never auto-dispatches. | Starting point for any learning session. |
 | `/assess` | Produces a discrete level (Bloom or SOLO) + a concrete gap list + a suggested next skill. Never a 1-100 score. | After one or more sessions; you want to know what you actually retained. |
 
 ### Talk-it-through skills

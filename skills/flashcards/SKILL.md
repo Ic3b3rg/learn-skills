@@ -46,6 +46,13 @@ See [CARD-FORMAT.md](CARD-FORMAT.md) for the exact card block, file structure, a
 7. **Write the file** to `learn/flashcards/<slug>-cards.md` using the Write tool.
 8. **Offer the follow-up.** After saving, suggest: *"Run `/quiz-me learn/flashcards/<slug>-cards.md` when you want to practise these."*
 
+### Workspace mode
+
+If `CURRICULUM.md` exists in the current directory, the skill is running inside a Scenario B workspace. In workspace mode:
+- Cards go to `flashcards/<slug>-cards.md` (not `learn/flashcards/`).
+
+If `CURRICULUM.md` is absent (legacy mode), cards go to `learn/flashcards/` as before.
+
 ### Using the cards later
 
 This skill doesn't *practise* the cards — it only generates them. Practice happens via `/quiz-me` on the file. The agent reading the cards file should treat each Front as a recall prompt and verify the user's answer against the Back + citation.

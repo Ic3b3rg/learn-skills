@@ -58,7 +58,6 @@ Assessment progress:
 ```
 
 ### Session protocol
-
 Read [LEVELS.md](LEVELS.md) for the full Bloom/SOLO mappings and the exact verdict block format. Summary of the 7 steps:
 
 1. **Frame** — restate object, scale, sources-closed rule. Wait for confirmation.
@@ -78,6 +77,10 @@ Pick by **dominant gap**, not by lowest level: structural → `/explain-and-chec
 ### Source fidelity
 
 Every verification reads the real artefact; every external claim carries `file:line` or a doc link. If an answer cannot be sourced, **drop the question** rather than score from memory.
+
+### Workspace mode
+
+If `CURRICULUM.md` exists in cwd: read `learning-records/` first and state prior progress (*"Last session: Apply (L3)"*). After verdict, write `learning-records/NNNN-<topic>-assessment.md` (frontmatter: `date`/`topic`/`level`; body: gap list; N = highest existing + 1). Absent: no records touched.
 
 ## Anti-patterns
 
