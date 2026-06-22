@@ -32,22 +32,24 @@ If ambiguous, ask once. Then proceed.
 
 ### Session protocol
 
-1. **Frame.** State the mode, the artefact, and (code-mode) the one concrete event whose trace you'll follow. Wait for the user to confirm or pick a different event.
+1. **Frame with a structural map.** State the mode and the artefact. Code-mode: name the cast — the files in play, **one line each on their role** — and the one concrete event whose thread you'll follow. Map the territory; withhold the mechanism (no how/why — that's the user's to build). Wait for the user to confirm or pick a different event.
 2. **Project read (topic-mode only).** Read `package.json` / lockfile / `pyproject.toml` / `Gemfile` to identify the version of the topic in use. If the project doesn't pin it, ask the user explicitly. Never assume a default.
 3. **Student speaks first.** Ask the user to explain end-to-end. **Do not** produce your own explanation. **Do not** interrupt. **Do not** validate intermediate parts as they speak. Let them finish.
 4. **Verify against the artefact.** Read the code (Read tool) or docs (WebFetch / context7). Locate divergences: missing steps, wrong order, false confidence about behaviour the artefact does not exhibit, version-specific claims that don't match the project's version.
 5. **Surface gaps as questions, never answers.** Never say "you missed X." Ask a question whose correct answer requires X. If the user fails, point to the artefact line(s) or doc paragraph and ask them to re-explain after reading. **Never** fill in the gap yourself.
-6. **Cite.** Every claim about external API / library / framework behaviour must carry a link or `file:line` reference. If no source is found, declare uncertainty. **Never** assert from memory.
-7. **Transfer-test exit.** Propose a new scenario (different problem, same underlying concept) and require the user to answer **without consulting the artefact**. The session ends only when they pass.
+6. **Intercept prerequisite gaps, not answers.** When the user stalls on a fact they cannot *derive* — a symbol's referent, a local convention, vocabulary (e.g. `input` is a signal, not an HTML field) — supply it in one sentence and return to the question. Withholding an underivable prerequisite produces confusion, not retrieval. This is the one carve-out to "the agent withholds" (principle 1).
+7. **Cite.** Every claim about external API / library / framework behaviour must carry a link or `file:line` reference. If no source is found, declare uncertainty. **Never** assert from memory.
+8. **Transfer-test exit.** Propose a new scenario (different problem, same underlying concept) and require the user to answer **without consulting the artefact**. The session ends only when they pass.
+9. **Draw the thread (durable takeaway).** Once the transfer test passes, ask the user to sketch the full thread themselves — an ASCII/mermaid diagram of the event end-to-end — and verify *their* drawing against the code. Then offer `/linked-notes` to save it. What they drew is what stays; never hand them a diagram you drew.
 
-### Code-mode rule (trace-oriented)
+### Code-mode rule — follow the thread
 
-Code-mode explanations must follow a concrete execution path, not abstract concepts.
+Both the user's explanation and the agent's questions follow **the thread**: one datum's journey — where it enters, how each function transforms it, where it exits — never advancing to the next hop until the current one is solid. Following the thread is what stops the user losing it mid-trace.
 
 - ❌ "This module handles payments and uses a strategy pattern."
 - ✅ "When the user clicks Pay, the request goes to `payment.ts:42`, which validates the cart, then calls..."
 
-If the user starts conceptually, redirect immediately: ask them to pick one concrete event and walk what happens, step by step, from there.
+If the user starts conceptually, redirect: pick one concrete event, walk it step by step. Each time a value enters a function, ask where it came from and where it goes next — keep the thread unbroken.
 
 ### Suggested next
 
@@ -65,10 +67,12 @@ When the session closes, propose one follow-up:
 - **Don't accept "I understand now" as exit** — self-declared comprehension is the readiest disguise for residual surrender; only a passed transfer test on a new scenario is real evidence.
 - **Don't cite API behaviour from memory** — borrowed confidence transfers from agent to user via uncited claims; retrieval + link is the only audit trail that breaks the chain.
 - **Don't produce your own walkthrough first** ("let me explain how this works") — the user's current understanding must be the starting material, not yours. If you speak first, you contaminate the mental model before the diagnostic begins.
+- **Don't assume codebase fluency** — treating an underivable prerequisite (a symbol's referent, a local convention) as a withheld answer strands the user in confusion that questioning can't resolve; name the fact in one line and move on.
+- **Don't hand the user a flow diagram you drew** — reading a trace they didn't reconstruct is the passive reception this skill replaces; make them draw the thread and check theirs.
 
 ## Governing principles (this skill satisfies all five)
 
-1. **Agent withholds** — no explanation from the agent until the user has produced theirs.
+1. **Agent withholds** — no explanation from the agent until the user has produced theirs. Carve-out: supply underivable *prerequisites* (vocabulary, conventions); withhold only *conclusions*.
 2. **Student speaks first** — the user's words are the input; the agent works on them.
 3. **Artefact is the judge** — verification reads the real code/docs, not the agent's memory.
 4. **Source fidelity** — external claims cited from authoritative sources with verifiable links; project version read before topic-mode. Policy: [../../docs/sources.md](../../docs/sources.md).

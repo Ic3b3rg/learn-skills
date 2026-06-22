@@ -41,7 +41,7 @@ Bloom and SOLO are **editorial concepts**, not skills. They appear internally as
 
 - **Don't add scheduling methodologies** (spaced repetition, interleaving as skill/flag). Rejected in [ADR 0002](docs/adr/0002-no-scheduling-no-monolithic-scores.md) — temporal state management is a sub-project that would swallow this one.
 - **Don't add monolithic numeric scores** to `assess`. Discrete Bloom/SOLO levels only. Same ADR.
-- **Don't add an automatic router.** `start-learn` proposes; the user decides. Auto-routing violates principle 1.
+- **The agent auto-selects the methodology** ([ADR 0004](docs/adr/0004-agent-selects-methodology.md)). `start-learn` detects the goal, declares the chosen skill + a one-line reason, and runs it; the user can redirect. This reverses the older "propose, user decides" rule. Principle 1 still binds *content* (sessions withhold explanations) — only the *meta-choice* of methodology is automated.
 - **Don't write SKILL.md in Italian** (or any non-English language). Bilingualism is a runtime behaviour, not a file format.
 - **Don't promote Bloom or SOLO to invocable skills.** They are editorial concepts. See [ADR 0001](docs/adr/0001-evidence-based-core-and-editorial-concepts.md).
 - **Don't add a new skill without evidence**. Methodologies in this repo are evidence-backed (explain-and-check, quiz-me, connect-to-what-you-know are the empirical core). Folk pedagogy doesn't enter.

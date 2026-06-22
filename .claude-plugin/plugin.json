@@ -1,7 +1,7 @@
 {
   "name": "learn-skills",
   "description": "Agent skills that package evidence-backed pedagogical methodologies (explain-and-check, quiz-me, connect-to-what-you-know, ask-me-questions, learn-by-doing, linked-notes, flashcards) as workflows applied to code. The anti-cognitive-surrender layer: closes the comprehension gap that opens when an LLM has done the work on the human's behalf.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": {
     "name": "TheCodingMan",
     "email": "s.ceccarini94@gmail.com",

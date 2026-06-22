@@ -65,7 +65,7 @@ Two canonical scenarios:
 
 | Command | What it does | When to use |
 |---|---|---|
-| `/start-learn` | Asks what you want to learn, then auto-detects the approach. **Scenario A** (existing code): proposes the right dialogic skill. **Scenario B** (from scratch): creates a workspace with `CURRICULUM.md`, HTML lessons, glossary, and `RESOURCES.md`. Never auto-dispatches. | Starting point for any learning session. |
+| `/start-learn` | Asks what you want to learn, then auto-detects the approach. **Scenario A** (existing code): selects and runs the right dialogic skill, declaring the choice (you can redirect). **Scenario B** (from scratch): creates a workspace with `CURRICULUM.md`, HTML lessons, glossary, and `RESOURCES.md`. | Starting point for any learning session. |
 | `/assess` | Produces a discrete level (Bloom or SOLO) + a concrete gap list + a suggested next skill. Never a 1-100 score. | After one or more sessions; you want to know what you actually retained. |
 
 ### Talk-it-through skills
@@ -103,7 +103,6 @@ Every skill in this repo obeys all five. A skill that breaks one is suspect.
 
 - **Spaced repetition.** Temporal state management is a separate project; we don't build it here.
 - **Interleaving as a skill or flag.** Surfaces as a tip — declare multiple topics up front and the agent will alternate naturally.
-- **Automatic skill routers.** `/start-learn` *proposes*; the agent never auto-dispatches based on inferred context.
 - **Monolithic 1-100 scores.** Discrete levels (Bloom/SOLO) + gap lists only.
 
 See [docs/adr/0002-no-scheduling-no-monolithic-scores.md](docs/adr/0002-no-scheduling-no-monolithic-scores.md) for the full rationale.
