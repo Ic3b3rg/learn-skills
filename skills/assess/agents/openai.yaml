@@ -1,0 +1,4 @@
+interface:
+  display_name: "Assess"
+  short_description: "Assess understanding without scores"
+  default_prompt: "Use $assess to evaluate what I understand and identify concrete gaps."

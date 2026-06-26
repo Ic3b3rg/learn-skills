@@ -1,0 +1,38 @@
+{
+  "name": "learn-skills",
+  "version": "0.3.0",
+  "description": "Agent skills that package evidence-backed pedagogical methodologies as workflows for learning code and topics with Codex.",
+  "author": {
+    "name": "TheCodingMan",
+    "email": "s.ceccarini94@gmail.com",
+    "url": "https://github.com/Ic3b3rg"
+  },
+  "homepage": "https://github.com/Ic3b3rg/learn-skills",
+  "repository": "https://github.com/Ic3b3rg/learn-skills",
+  "license": "MIT",
+  "keywords": [
+    "learning",
+    "pedagogy",
+    "agent-skills",
+    "codex",
+    "code-comprehension"
+  ],
+  "skills": "./skills",
+  "interface": {
+    "displayName": "Learn Skills",
+    "shortDescription": "Evidence-backed workflows for learning code",
+    "longDescription": "Learn Skills packages evidence-backed teaching workflows for Codex: explain code in your own words, test recall, connect concepts to prior knowledge, generate exercises, notes, and flashcards, and assess understanding without false numeric scores.",
+    "developerName": "TheCodingMan",
+    "category": "Education",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/Ic3b3rg/learn-skills",
+    "defaultPrompt": [
+      "Use $start-learn to choose the right learning workflow.",
+      "Use $explain-and-check to verify my understanding of this file.",
+      "Use $learn-by-doing to create practice exercises for this topic."
+    ]
+  }
+}

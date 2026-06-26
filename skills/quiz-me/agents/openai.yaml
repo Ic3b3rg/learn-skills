@@ -1,0 +1,4 @@
+interface:
+  display_name: "Quiz Me"
+  short_description: "Test recall before consulting sources"
+  default_prompt: "Use $quiz-me to test what I remember before looking at the source."

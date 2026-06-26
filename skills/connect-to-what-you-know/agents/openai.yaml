@@ -1,0 +1,4 @@
+interface:
+  display_name: "Connect to What You Know"
+  short_description: "Connect new ideas to prior knowledge"
+  default_prompt: "Use $connect-to-what-you-know to help me anchor this concept to what I already know."

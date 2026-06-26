@@ -1,0 +1,4 @@
+interface:
+  display_name: "Learn By Doing"
+  short_description: "Generate practice exercises with checks"
+  default_prompt: "Use $learn-by-doing to generate exercises I can solve and bring back for verification."

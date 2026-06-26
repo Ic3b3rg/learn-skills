@@ -1,0 +1,4 @@
+interface:
+  display_name: "Flashcards"
+  short_description: "Create cited retrieval flashcards"
+  default_prompt: "Use $flashcards to create cited retrieval cards from this learning session."

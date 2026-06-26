@@ -1,0 +1,20 @@
+{
+  "name": "learn-skills",
+  "interface": {
+    "displayName": "Learn Skills"
+  },
+  "plugins": [
+    {
+      "name": "learn-skills",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Education"
+    }
+  ]
+}

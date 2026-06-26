@@ -1,0 +1,4 @@
+interface:
+  display_name: "Explain and Check"
+  short_description: "Verify understanding against sources"
+  default_prompt: "Use $explain-and-check to test my explanation against the real code or docs."

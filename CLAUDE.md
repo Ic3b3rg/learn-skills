@@ -10,12 +10,16 @@ For the rationale, glossary, and decisions log, read [CONTEXT.md](CONTEXT.md). F
 README.md            → User-facing overview
 CONTEXT.md           → Design rationale, glossary, decisions log
 CLAUDE.md            → This file: operating conventions for editing the project
+.codex-plugin/       → Codex plugin manifest for installable distribution
+.agents/plugins/     → Codex marketplace entry pointing at this repo root
+.claude-plugin/      → Claude Code plugin manifest
 docs/
   adr/               → Architectural decision records (numbered)
   sources.md         → Verification source policy (cited from every skill's principle 4)
 skills/
   <skill-name>/
     SKILL.md         → Required, ≤ 100 lines
+    agents/openai.yaml → Optional Codex UI metadata
     <REFERENCE>.md   → Optional, format-spec / reference content, one level deep
 ```
 
@@ -61,4 +65,13 @@ grep -L "docs/sources.md" skills/*/SKILL.md   # must return nothing
 
 # Frontmatter present
 for s in skills/*/SKILL.md; do head -1 "$s"; done   # must all be "---"
+```
+
+After any change to Codex plugin packaging, verify:
+
+```bash
+python3 "$HOME/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py" .
+home=/private/tmp/codex-home-learn-skills-test
+rm -rf "$home" && mkdir -p "$home"
+HOME="$home" codex plugin marketplace add .
 ```

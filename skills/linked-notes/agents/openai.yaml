@@ -1,0 +1,4 @@
+interface:
+  display_name: "Linked Notes"
+  short_description: "Capture atomic linked learning notes"
+  default_prompt: "Use $linked-notes to turn this learning session into atomic cited notes."

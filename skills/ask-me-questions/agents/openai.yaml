@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ask Me Questions"
+  short_description: "Question-only reasoning support"
+  default_prompt: "Use $ask-me-questions to help me reason this out without giving me the answer."

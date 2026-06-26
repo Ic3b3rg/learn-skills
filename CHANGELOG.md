@@ -2,6 +2,14 @@
 
 All notable changes to learn-skills are documented here. Versions follow semantic versioning (pre-1.0: minor bumps cover new behaviour and behaviour-changing reversals).
 
+## Unreleased
+
+### Added — Codex distribution
+- Added `.codex-plugin/plugin.json` so the existing skills package as a Codex plugin.
+- Added `.agents/plugins/marketplace.json` so the repository can be added as a Codex marketplace.
+- Added `agents/openai.yaml` UI metadata for every skill.
+- Documented the Codex marketplace installation flow in `README.md`.
+
 ## 0.3.0 — 2026-06-19
 
 ### Changed — architecture
