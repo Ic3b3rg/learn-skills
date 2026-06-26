@@ -10,18 +10,55 @@ Read [CONTEXT.md](CONTEXT.md) for the full design rationale, vocabulary, and dec
 
 ## Quickstart
 
+### Codex
+
+```bash
+codex plugin marketplace add Ic3b3rg/learn-skills
+```
+
+Then open the Codex app plugin directory, choose the **Learn Skills** marketplace, and install **Learn Skills**.
+
+### Claude Code
+
 ```bash
 /plugin marketplace add Ic3b3rg/learn-skills
 /plugin install learn-skills@ic3b3rg-learn-skills
 ```
 
-**The easiest way to begin**: run `/start-learn`. Tell it what you want to learn — it figures out the right approach and acts. You always make the final call.
+If you don't have SSH keys set up on GitHub and the marketplace command fails, use the explicit HTTPS form:
+
+```bash
+/plugin marketplace add https://github.com/Ic3b3rg/learn-skills.git
+/plugin install learn-skills@ic3b3rg-learn-skills
+```
+
+**The easiest way to begin**: invoke `start-learn`. Tell it what you want to learn — it figures out the right approach and acts. You always make the final call.
+
+Codex:
+
+```
+$start-learn
+```
+
+Claude Code:
 
 ```
 /start-learn
 ```
 
 If you already know what you need:
+
+Codex:
+
+```
+# Understand code an LLM just wrote
+$explain-and-check path/to/that-file.ts
+
+# Check what you've actually learned
+$assess "event sourcing"
+```
+
+Claude Code:
 
 ```
 # Understand code an LLM just wrote
@@ -31,7 +68,7 @@ If you already know what you need:
 /assess "event sourcing"
 ```
 
-The other six skills (`quiz-me`, `connect-to-what-you-know`, `ask-me-questions`, `learn-by-doing`, `linked-notes`, `flashcards`) are listed below — or just run `/start-learn` and let the interview surface the right one.
+The other six skills (`quiz-me`, `connect-to-what-you-know`, `ask-me-questions`, `learn-by-doing`, `linked-notes`, `flashcards`) are listed below — or just invoke `start-learn` and let the interview surface the right one.
 
 ---
 
@@ -48,7 +85,7 @@ LLMs often write good code. The risk isn't bad code — it's that **the human's 
 
 ## When to use these skills
 
-Not sure where to start? Run `/start-learn` — tell it what you want to learn and it takes it from there. You always make the final call.
+Not sure where to start? Invoke `start-learn` — tell it what you want to learn and it takes it from there. You always make the final call.
 
 Two canonical scenarios:
 
@@ -60,6 +97,8 @@ Two canonical scenarios:
 ---
 
 ## The skill set
+
+Command syntax: Codex uses `$skill-name`; Claude Code uses `/skill-name`.
 
 ### Find your starting point
 
@@ -110,6 +149,22 @@ See [docs/adr/0002-no-scheduling-no-monolithic-scores.md](docs/adr/0002-no-sched
 ---
 
 ## Install
+
+### Codex (plugin marketplace)
+
+```bash
+codex plugin marketplace add Ic3b3rg/learn-skills
+```
+
+This repository is a Codex marketplace. Its marketplace file lives at `.agents/plugins/marketplace.json` and points to the root plugin manifest at `.codex-plugin/plugin.json`.
+
+For local development before publishing:
+
+```bash
+codex plugin marketplace add .
+```
+
+Restart Codex if the marketplace or newly installed skills do not appear immediately.
 
 ### Claude Code (plugin marketplace)
 
