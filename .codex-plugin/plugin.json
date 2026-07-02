@@ -17,7 +17,7 @@
     "codex",
     "code-comprehension"
   ],
-  "skills": "./skills",
+  "skills": "./skills/",
   "interface": {
     "displayName": "Learn Skills",
     "shortDescription": "Evidence-backed workflows for learning code",

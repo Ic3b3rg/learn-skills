@@ -14,9 +14,30 @@ Read [CONTEXT.md](CONTEXT.md) for the full design rationale, vocabulary, and dec
 
 ```bash
 codex plugin marketplace add Ic3b3rg/learn-skills
+codex plugin add learn-skills@learn-skills
+codex plugin list
 ```
 
-Then open the Codex app plugin directory, choose the **Learn Skills** marketplace, and install **Learn Skills**.
+`codex plugin marketplace add` registers the marketplace. `codex plugin add` installs and enables the plugin.
+
+After installing, start a new Codex thread and invoke `$start-learn`.
+
+There is no `/learn-skills` skill; **Learn Skills** is the plugin name.
+
+#### Troubleshooting: broken Codex CLI install
+
+If Codex fails with `spawn ... vendor/.../codex/codex ENOENT`, the global npm Codex CLI install is incomplete or corrupt. Reinstall the CLI, then verify plugin commands again:
+
+```bash
+npm uninstall -g @openai/codex
+npm install -g @openai/codex@latest
+rehash # zsh; use `hash -r` in bash
+which codex
+codex --version
+codex plugin marketplace list
+```
+
+This fixes the broken CLI binary path. It is not a learn-skills packaging failure.
 
 ### Claude Code
 
@@ -154,17 +175,25 @@ See [docs/adr/0002-no-scheduling-no-monolithic-scores.md](docs/adr/0002-no-sched
 
 ```bash
 codex plugin marketplace add Ic3b3rg/learn-skills
+codex plugin add learn-skills@learn-skills
+codex plugin list
 ```
 
 This repository is a Codex marketplace. Its marketplace file lives at `.agents/plugins/marketplace.json` and points to the root plugin manifest at `.codex-plugin/plugin.json`.
+
+`codex plugin marketplace add` registers the marketplace. `codex plugin add` installs and enables the plugin.
+
+After installing, start a new Codex thread and invoke `$start-learn`. There is no `/learn-skills` skill; **Learn Skills** is the plugin name.
 
 For local development before publishing:
 
 ```bash
 codex plugin marketplace add .
+codex plugin add learn-skills@learn-skills
+codex plugin list
 ```
 
-Restart Codex if the marketplace or newly installed skills do not appear immediately.
+Restart Codex if the marketplace or newly installed skills do not appear immediately. If the CLI fails with `spawn ... vendor/.../codex/codex ENOENT`, reinstall the global npm Codex CLI as shown in the troubleshooting section above.
 
 ### Claude Code (plugin marketplace)
 
@@ -195,4 +224,4 @@ Skills are plain markdown files with YAML frontmatter, so any Claude / agent pla
 
 ## Status
 
-Early stage (v0.1.0). The design is settled (see [CONTEXT.md](CONTEXT.md) and the ADRs in [docs/adr/](docs/adr/)); all 9 skills are written and validated. Real-world iteration begins next.
+Early stage (v0.3.0). The design is settled (see [CONTEXT.md](CONTEXT.md) and the ADRs in [docs/adr/](docs/adr/)); all 9 skills are written and validated. Real-world iteration continues.
