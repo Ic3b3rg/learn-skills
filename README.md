@@ -181,6 +181,30 @@ Copy **complete skill folders**, including reference files and `SOURCES.md`, int
 
 These discovery paths are documented by the applications; they are not a claim that this package has passed runtime tests on every client or model. See the [compatibility research and official sources](docs/research/skill-portability.md#application-compatibility).
 
+### Agensi: single-skill distribution
+
+Agensi's [creator guide](https://www.agensi.io/learn/how-to-sell-skills-on-agensi) describes a ZIP containing `SKILL.md` and its supporting files. Build the dedicated archive rather than uploading the plugin repository:
+
+```bash
+python3 scripts/build_agensi.py
+```
+
+Upload `dist/learn-skills-agensi.zip`. The builder refuses to overwrite an existing archive; use `--output /path/to/new.zip` for subsequent builds. Generated archives are ignored by Git.
+
+The ZIP has one root `SKILL.md`, a shared source policy, and nine workflow references. The references are generated from the canonical skills, with their format guides included and plugin dispatch adapted to local file loading. No separate skill installations are needed. Repository plugin commands still work as documented above; the single-skill archive instead uses:
+
+```text
+$learn-skills quiz-me src/orders/payment.ts
+```
+
+Or, in Claude Code after installing the standalone archive:
+
+```text
+/learn-skills quiz-me src/orders/payment.ts
+```
+
+You can also ask naturally: “Use Learn Skills to help me understand this file.” The host must make the supporting files readable to the agent. Passing only the entrypoint text without its resources is insufficient. This archive has local packaging checks; Agensi upload acceptance and execution through its MCP delivery still require platform testing.
+
 ### Local development installation
 
 ```bash

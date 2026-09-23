@@ -4,6 +4,12 @@ All notable changes to learn-skills are documented here. Versions follow semanti
 
 ## Unreleased
 
+### Added — Agensi distribution
+- Added a reproducible single-skill ZIP builder with a root entrypoint and nine bundled workflows.
+- Adapted plugin dispatch to local reference loading while retaining canonical learning protocols and output paths.
+- Added archive closure, deterministic build, overwrite protection, and stale-adapter regression checks.
+- Documented standalone invocation and the remaining Agensi upload/MCP validation boundary.
+
 ### Fixed — skill portability and instruction consistency
 - Corrected `start-learn` YAML without changing its description.
 - Bundled the complete source policy with every skill and added synchronization and validation commands.
