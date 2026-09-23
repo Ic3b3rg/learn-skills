@@ -4,6 +4,19 @@ All notable changes to learn-skills are documented here. Versions follow semanti
 
 ## Unreleased
 
+### Fixed — skill portability and instruction consistency
+- Corrected `start-learn` YAML without changing its description.
+- Bundled the complete source policy with every skill and added synchronization and validation commands.
+- Replaced provider-specific tool requirements with equivalent retrieval capabilities.
+- Clarified missing router dependencies, workspace output paths, source-closed turn ordering, and the assessment checklist for both taxonomies.
+- Translated the workspace and lesson references into English, preserving their formats and requirements.
+
+### Improved — discovery and regression checks
+- Shortened all nine descriptions to their purpose and activation context; teaching protocols remain in the bodies.
+- Added router-target checks and regression tests for invalid or incomplete packages.
+- Added a GitHub validation workflow with read-only permissions and a pinned checkout action.
+- Added 27 behavioral evaluation cases and an offline preparer for baseline/current, no-skill, and missing-dependency comparisons. Actual model runs are separate.
+
 ### Added — Codex distribution
 - Added `.codex-plugin/plugin.json` so the existing skills package as a Codex plugin.
 - Added `.agents/plugins/marketplace.json` so the repository can be added as a Codex marketplace.

@@ -15,12 +15,13 @@ CLAUDE.md            → This file: operating conventions for editing the projec
 .claude-plugin/      → Claude Code plugin manifest
 docs/
   adr/               → Architectural decision records (numbered)
-  sources.md         → Verification source policy (cited from every skill's principle 4)
+  sources.md         → Canonical verification source policy, bundled into every skill
 skills/
   <skill-name>/
     SKILL.md         → Required, ≤ 100 lines
     agents/openai.yaml → Optional Codex UI metadata
     <REFERENCE>.md   → Optional, format-spec / reference content, one level deep
+    SOURCES.md       → Generated copy of docs/sources.md for standalone installation
 ```
 
 ## Skills (9 total, two families + two meta)
@@ -33,10 +34,10 @@ Bloom and SOLO are **editorial concepts**, not skills. They appear internally as
 
 ## Conventions (non-negotiable)
 
-- **SKILL.md ≤ 100 lines.** Hard cap. Claude previews via `head -100`; content past line 100 is invisible during discovery. Split overflow into a sibling reference file (`UPPER-KEBAB.md`).
+- **SKILL.md ≤ 100 lines.** Local editorial cap, not a discovery limit. Discovery loads metadata; the body loads on activation. Split overflow into a sibling reference file (`UPPER-KEBAB.md`). See [the portability research](docs/research/skill-portability.md) for the official guidance.
 - **YAML frontmatter**: `name` (kebab-case, ≤ 64 char) + `description` (≤ 1024 char, third person, what + when triggers).
 - **Reference files one level deep only.** `SKILL.md` → `REFERENCE.md` is fine. `SKILL.md` → `REFERENCE.md` → `OTHER.md` is forbidden — Claude may not follow the second hop.
-- **Five operating principles** apply to every skill (see [CONTEXT.md](CONTEXT.md)): (1) agent withholds; (2) student speaks first; (3) artefact is the judge; (4) source fidelity → [docs/sources.md](docs/sources.md); (5) exit is a transfer test. New skills must satisfy all five.
+- **Five operating principles** apply to every skill (see [CONTEXT.md](CONTEXT.md)): (1) agent withholds; (2) student speaks first; (3) artefact is the judge; (4) source fidelity → [docs/sources.md](docs/sources.md); (5) exit is a transfer test. New skills must satisfy all five. Skill entrypoints link their bundled `SOURCES.md`; edit the canonical policy and regenerate copies with `python3 scripts/sync_source_policy.py`.
 - **Anti-patterns use "because Y"** — `Don't X because Y tends to cause Z`. Bare prohibitions are weaker than explained ones.
 - **English everywhere** in files. The agent translates user-facing dialogue at runtime — never write Italian (or any other language) in SKILL.md, REFERENCE.md, or docs.
 - **Cite, never assert from memory.** Every claim about external API / library / framework behaviour requires a verifiable link to an authoritative source ([docs/sources.md](docs/sources.md)).
@@ -57,15 +58,13 @@ To create or modify a skill, use the `write-a-skill` skill (`/write-a-skill`). I
 After any change to a SKILL.md, verify:
 
 ```bash
-# Line cap (must be ≤ 100 for every SKILL.md)
-for s in skills/*/SKILL.md; do wc -l "$s"; done
-
-# Every skill links docs/sources.md from principle 4
-grep -L "docs/sources.md" skills/*/SKILL.md   # must return nothing
-
-# Frontmatter present
-for s in skills/*/SKILL.md; do head -1 "$s"; done   # must all be "---"
+# YAML parsing, line caps, names, local resource closure, policy synchronization,
+# optional UI metadata and plugin JSON syntax; Ruby standard library only.
+ruby scripts/validate_skills.rb
+python3 -m unittest discover -s tests -v
 ```
+
+These checks also run in `.github/workflows/validate-skills.yml`. For discovery or behavioral changes, use the isolated cases in [evals/README.md](evals/README.md); keep grading criteria out of the agent's input and distinguish preparation from actual model execution.
 
 After any change to Codex plugin packaging, verify:
 

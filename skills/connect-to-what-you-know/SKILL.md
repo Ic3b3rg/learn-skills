@@ -1,6 +1,6 @@
 ---
 name: connect-to-what-you-know
-description: Builds durable understanding by forcing the user to connect a new concept to things they already know — analogies to other languages, prior patterns, similar abstractions in different domains. The agent never volunteers the analogy; the user produces it, the agent stress-tests it. Use when the user is learning something new and wants to anchor it to existing knowledge, when reading code that uses an unfamiliar pattern, when a concept "isn't sticking", or anytime they say "what does this remind me of?" or "connect this to what I know".
+description: "Checks the user's analogies between new concepts and familiar ideas. Use when learning an unfamiliar pattern, connecting languages or frameworks, anchoring a concept that is not sticking, or asking \"what does this remind me of?\"."
 ---
 
 # Connect to What You Know
@@ -41,7 +41,7 @@ Inspect the argument:
    - **What's the consequence?** If the user reasons from this analogy in code, where will it lead them wrong? This is the surrender risk — false analogies install confident wrong models.
 5. **Surface the gap as a question, not a fix.** If the user's analogy is broken in an important way, don't say "actually it's like Z instead." Ask: *"given X in the artefact, can the analogy to Python decorators still account for this behaviour?"* Let the user repair their own model.
 6. **Optional bridge.** If the user has no analogies and is stuck, offer **one** structural question (not an analogy): *"think of any time you've seen a function that takes another function and returns a modified one — does anything come to mind?"* Bridges are scaffolds, not answers.
-7. **Cite.** Every claim about how a framework / library / language feature behaves carries a link or `file:line` reference. Cross-language claims (e.g. "Python decorators do X") must be cited to the relevant docs at the relevant version.
+7. **Cite.** Every claim about how a framework / library / language feature behaves carries a link or `file:line` reference. Verify both sides of cross-language comparisons against the relevant docs at their respective versions.
 8. **Transfer-test exit.** Pose a scenario where the analogy *would* tempt the user toward a wrong answer if it were fully right. They must answer correctly, naming where the analogy breaks. Only then is the session complete.
 
 ### Suggested next
@@ -66,5 +66,5 @@ When the session closes, propose one follow-up:
 1. **Agent withholds** — no analogies from the agent until the user has produced theirs.
 2. **Student speaks first** — the user's connections are the input.
 3. **Artefact is the judge** — every analogy is checked against the real code/docs, not asserted from memory.
-4. **Source fidelity** — analogues across languages/frameworks cited at the relevant version, from authoritative sources only. Policy: [../../docs/sources.md](../../docs/sources.md).
+4. **Source fidelity** — analogues across languages/frameworks cited at the relevant version, from authoritative sources only. Before verifying, read [SOURCES.md](SOURCES.md).
 5. **Exit is a transfer test** — session ends on a scenario where the analogy's break-point matters.

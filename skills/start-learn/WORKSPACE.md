@@ -1,48 +1,50 @@
-# Workspace — struttura e scopo dei file
+# Workspace — directory structure and file purposes
 
-Riferimento per la **Scenario B workspace** creata da `/start-learn`. Il percorso è scelto dall'utente in plain text; l'accesso nelle sessioni successive avviene con `cd` nella cartella.
+Reference for the **Scenario B workspace** created by `/start-learn`. The user chooses the path in plain text; in later sessions, they access it by using `cd` to enter the directory.
 
-## Struttura
+## Directory structure
 
 ```
 workspace-root/
-  MISSION.md            ← perché l'utente vuole imparare questo topic
-  CURRICULUM.md         ← roadmap delle lezioni, editabile a mano
-  NOTES.md              ← preferenze dell'utente, note dell'agente
-  RESOURCES.md          ← fonti Knowledge + community Wisdom
+  MISSION.md            ← why the user wants to learn this topic
+  CURRICULUM.md         ← lesson roadmap, editable by hand
+  NOTES.md              ← user preferences and agent notes
+  RESOURCES.md          ← Knowledge sources + community Wisdom
   lessons/
-    0001-nome.html      ← lezioni generate on-demand
-    0002-nome.html
+    0001-name.html      ← lessons generated on demand
+    0002-name.html
   reference/
-    glossario.html      ← glossario auto-costruito lezione per lezione
+    glossario.html      ← glossary built one lesson at a time
   learning-records/
-    0001-slug.md        ← progress record dopo ogni assessment
-  notes/                ← atomic notes da /linked-notes (workspace mode)
-  flashcards/           ← card files da /flashcards (workspace mode)
-  exercises/            ← exercise files da /learn-by-doing (workspace mode)
+    0001-slug.md        ← progress record after each assessment
+  notes/                ← atomic notes from /linked-notes (workspace mode)
+  flashcards/           ← card files from /flashcards (workspace mode)
+  exercises/            ← exercise files from /learn-by-doing (workspace mode)
 ```
 
-## File chiave
+## Key files
 
-**`CURRICULUM.md`** — roadmap editabile. Formato:
+**`CURRICULUM.md`** — editable roadmap. Format:
+
 ```markdown
 # Curriculum: <topic>
-- [ ] Lezione 1 — Titolo
-- [x] Lezione 2 — Titolo   ← già generata
-- [ ] Lezione 3 — Titolo
+- [ ] Lesson 1 — Title
+- [x] Lesson 2 — Title   ← already generated
+- [ ] Lesson 3 — Title
 ```
-L'agente segna `[x]` quando genera il file HTML. L'utente può riordinare, aggiungere o rimuovere righe liberamente.
 
-**`MISSION.md`** — goal in 3–5 righe: perché, cosa conta come successo, vincoli, fuori scope. Scritto dall'agente dopo il primo scambio, confermato dall'utente.
+The agent marks `[x]` when it generates the HTML file. The user can freely reorder, add, or remove lines.
 
-**`RESOURCES.md`** — popolato via web search. Due sezioni: `## Knowledge` (docs ufficiali, libri) e `## Wisdom` (community, forum, corsi). Fallback se web search non disponibile: nomi senza URL + flag "verifica il link".
+**`MISSION.md`** — a goal in 3–5 lines: why, what counts as success, constraints, and what is out of scope. Written by the agent after the first exchange and confirmed by the user.
 
-**`reference/glossario.html`** — ogni lezione aggiunge automaticamente i termini nuovi. Il file è una pagina HTML stampabile, aggiornata incrementalmente.
+**`RESOURCES.md`** — populated through web search. Two sections: `## Knowledge` (official docs, books) and `## Wisdom` (community, forums, courses). If web search is unavailable, list source names without URLs and flag them with "verify the link."
+
+**`reference/glossario.html`** — each lesson automatically adds its new terms. The file is a printable HTML page, updated incrementally.
 
 ## Workspace detection
 
-Qualsiasi skill (assess, linked-notes, flashcards, learn-by-doing) rileva la workspace controllando la presenza di `CURRICULUM.md` nella directory corrente. Se presente → workspace mode. Se assente → legacy mode (percorsi `learn/` come prima).
+Workspace-aware skills (assess, linked-notes, flashcards, learn-by-doing) detect the workspace by checking for `CURRICULUM.md` in the current directory. If present → workspace mode. If absent → legacy mode (the existing `learn/` paths).
 
-## Regola del `cd`
+## The `cd` rule
 
-L'utente deve essere dentro la workspace prima di invocare qualsiasi skill workspace-aware. Non esiste routing automatico: è responsabilità dell'utente navigare nella cartella giusta.
+The user must be inside the workspace before invoking any workspace-aware skill. There is no automatic routing: the user is responsible for navigating to the correct directory.

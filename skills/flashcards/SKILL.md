@@ -1,13 +1,13 @@
 ---
 name: flashcards
-description: Produces ASCII flashcards (question on the front, answer on the back, separated by a fold marker) for retrieval practice on a topic or piece of code. Each card targets one atomic fact, anchored to a citation. The user generates the question phrasing; the agent verifies the answer against the real artefact. Use when the user wants reusable retrieval material after a learning session, when capturing facts from a /explain-and-check or /quiz-me session, or anytime they say "give me flashcards" or "I want to drill this".
+description: "Creates cited Markdown flashcards for later retrieval practice. Use when the user wants reusable cards, facts to drill, or flashcards from code or a learning session; practising existing cards belongs to quiz-me."
 ---
 
 # Flashcards
 
 > Speak to the user in their language; these instructions are in English for the agent.
 
-A generative skill that produces a markdown file of ASCII flashcards under `learn/flashcards/`. Each card is one atomic fact, with a clearly-folded answer. Cards are a *vehicle* for retrieval practice — see [ADR 0001](../../docs/adr/0001-evidence-based-core-and-editorial-concepts.md) — not a methodology in themselves. This skill produces the artefact; `/quiz-me` is the methodology that uses it.
+A generative skill that produces a markdown file of ASCII flashcards under `learn/flashcards/`. Each card is one atomic fact, with a clearly-folded answer. Cards are a *vehicle* for retrieval practice — see [ADR 0001](https://github.com/Ic3b3rg/learn-skills/blob/master/docs/adr/0001-evidence-based-core-and-editorial-concepts.md) — not a methodology in themselves. This skill produces the artefact; `/quiz-me` is the methodology that uses it.
 
 ## Quick start
 
@@ -41,10 +41,10 @@ See [CARD-FORMAT.md](CARD-FORMAT.md) for the exact card block, file structure, a
    - *"What's one thing about this code you'd want to recall a week from now without looking?"*
    - *"What's the first specific fact about this topic you want to drill?"*
 4. **Atomicity check.** If the front contains "and" or multiple clauses, ask the user to split.
-5. **Source the answer.** Read code (Read tool) or docs (WebFetch / context7) to write a verified back. Cite. **Never** write an answer from memory.
+5. **Source the answer.** Read code or retrieve the authoritative documentation with available tools to write a verified back. Cite. **Never** write an answer from memory.
 6. **Loop.** Continue until the user says stop, or 15 cards, whichever first.
-7. **Write the file** to `learn/flashcards/<slug>-cards.md` using the Write tool.
-8. **Offer the follow-up.** After saving, suggest: *"Run `/quiz-me learn/flashcards/<slug>-cards.md` when you want to practise these."*
+7. **Write the file** to `flashcards/<slug>-cards.md` in workspace mode, otherwise `learn/flashcards/<slug>-cards.md`, using the available file-editing tools.
+8. **Offer the follow-up.** After saving, suggest `quiz-me` on the actual saved path when the user wants to practise.
 
 ### Workspace mode
 
@@ -64,12 +64,12 @@ This skill doesn't *practise* the cards — it only generates them. Practice hap
 - **Don't write compound cards** (two facts in one) — compound cards make it impossible to distinguish "knew one fact and guessed the other" from "knew both"; atomicity is what makes recall signal interpretable.
 - **Don't generate without citations because "it's basic"** — cite anyway; cards are durable, and basic-looking facts often turn out to be the version-specific ones that drift over time.
 - **Don't put the answer above the fold** — the `<details>` fold is the entire point of the format; visible answers turn cards into reading material, which doesn't drive retrieval.
-- **Don't write more than 15 cards in one session** — fatigue produces lower-quality phrasing, which produces lower-quality recall later; the user pays the cost on every future review.
+- **Don't write more than 15 cards in one session** — this workflow bounds the amount of material to phrase and verify; fifteen is a product limit, not a measured fatigue threshold.
 
-## Governing principles (this skill satisfies all five)
+## Governing principles
 
 1. **Agent withholds** — answers folded; the user produces the front phrasing.
 2. **Student speaks first** — the user's recall need is the input.
 3. **Artefact is the judge** — every back is verified against the real code/docs.
-4. **Source fidelity** — every back ends with a citation to an authoritative source; stack version anchored before generation. Policy: [../../docs/sources.md](../../docs/sources.md).
-5. **Exit is a transfer test** — the cards themselves *are* transfer-test fuel for `/quiz-me` later.
+4. **Source fidelity** — every back ends with a citation to an authoritative source; stack version anchored before generation. Before verifying, read [SOURCES.md](SOURCES.md).
+5. **Transfer and completion** — saving cited cards completes generation; it does not demonstrate recall or transfer. The user may practise with `quiz-me` later.

@@ -1,6 +1,6 @@
 ---
 name: quiz-me
-description: Forces the user to retrieve knowledge from memory before consulting any source, then verifies what they produced against the real artefact (code, tests, official documentation). Use when the user wants to test what they have actually learned about a topic or a piece of code, to consolidate knowledge after a learning session, after a few days have passed since they last touched a subject, or anytime they say "let me see if I remember", "test my recall", or "let's check what I retained".
+description: "Tests recall of previously studied code or topics. Use when the user wants to retrieve from memory, consolidate prior learning, or says \"test my recall\" or \"let me see if I remember\"; not for first contact with unfamiliar material."
 ---
 
 # Quiz Me
@@ -15,6 +15,8 @@ The user retrieves what they know **without looking** at code, notes, or docs fi
 User: /quiz-me src/auth/session.ts
 Agent: Close the file before answering. I won't ask you anything until you confirm
        it's closed.
+User: It's closed.
+Agent:
        Tell me from memory: what does this module export, and what does each export do?
        Don't worry about being exhaustive — just write what you actually remember.
 ```
@@ -36,7 +38,7 @@ If the argument refers to something the user has clearly never seen, redirect: t
 1. **Source closed.** Explicitly instruct the user to close the file / put the docs away / not look anything up. Wait for confirmation. This is the single most violated rule in self-study and the skill must enforce it.
 2. **Ask a retrieval-shaped question.** Not "tell me about X" (too open, the user fills space). Use concrete prompts: *"name the three things this module exports"*, *"list the steps of the request flow you remember"*, *"give me the signature of the main function and what it returns."* Specific shapes force commitment.
 3. **Project read (topic-mode only).** Before verification, read `package.json` / lockfile / `pyproject.toml` to anchor on the version actually used. Never compare the recall against generic knowledge.
-4. **Verify against the artefact.** Read the code (Read tool) or docs (WebFetch / context7). Mark what the user got correct, what they missed entirely, and what they recalled *wrong* (those are the most dangerous — confident false memories).
+4. **Verify against the artefact.** Read the code or retrieve the authoritative documentation with available tools. Mark what the user got correct, what they missed entirely, and what they recalled *wrong* (those are the most dangerous — confident false memories).
 5. **Triage the gaps.** Categorize: (a) detail forgotten (cheap to relearn), (b) structure misremembered (concept-level gap), (c) confidently wrong (false memory — needs explicit correction with evidence).
 6. **Targeted re-retrieval, not re-reading.** Don't dump the correct answer. For each gap, ask a follow-up question that *requires* the right answer to satisfy. Only if the user still cannot retrieve, point at the file:line or doc paragraph and ask them to read and then re-retrieve later (close again, answer again).
 7. **Cite.** Every external claim about API / library behaviour must carry a link or `file:line` reference. If no source is found, declare uncertainty.
@@ -65,5 +67,5 @@ When the session closes, propose one follow-up:
 1. **Agent withholds** — no information from the agent until the user has retrieved.
 2. **Student speaks first** — the user's retrieval is the input.
 3. **Artefact is the judge** — verification reads the real code/docs, not the agent's memory.
-4. **Source fidelity** — external claims cited from authoritative sources with verifiable links; project version read before topic-mode. Policy: [../../docs/sources.md](../../docs/sources.md).
+4. **Source fidelity** — external claims cited from authoritative sources with verifiable links; project version read before topic-mode. Before verifying, read [SOURCES.md](SOURCES.md).
 5. **Exit is a transfer test** — session ends on a passed new-scenario question, source closed.

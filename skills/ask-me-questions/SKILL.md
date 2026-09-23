@@ -1,13 +1,13 @@
 ---
 name: ask-me-questions
-description: The agent asks the user only questions — never declares facts, never gives answers, never produces explanations. Each question is targeted to advance the user one step toward an insight they will construct themselves. Use when the user explicitly wants to reason something out without being told (debugging an unfamiliar piece of code, working through a design choice, untangling a confusion), or anytime they say "ask me questions" or "don't tell me, ask me".
+description: "Guides reasoning through one question at a time, with citation and safety exceptions. Use when the user asks to reason without being told the answer, work through a confusion or design choice, or says \"ask me questions\"."
 ---
 
 # Ask Me Questions
 
 > Speak to the user in their language; these instructions are in English for the agent.
 
-The agent's entire output, across the entire session, consists of **questions**. Never a fact. Never an explanation. Never "the answer is..." Questions are precise, one at a time, calibrated to where the user currently is. The user reaches the insight themselves; the agent's only job is the next-best question.
+The agent's output consists of **questions**, with only the citation-request and safety-stop exceptions defined below. Questions are precise, one at a time, calibrated to where the user currently is. The user reaches the insight themselves; the agent's only job is the next-best question.
 
 ## Quick start
 
@@ -56,16 +56,16 @@ The session ends when **the user says it does**. Don't propose closure with stat
 
 ## Anti-patterns
 
-- **Don't slip in a declarative sentence as "context"** — *"This function is a curried builder. What do you think it returns?"* — the first sentence is the violation, because it does the user's recognition work for them. Reformulate as a question: *"What pattern does this function look like? What would you guess it returns?"*
+- **Don't slip in a declarative sentence as "context"** — *"This function is a curried builder. What do you think it returns?"* — the first sentence is the violation, because it does the user's recognition work for them. Ask *"What pattern does this function look like?"*, wait for the answer, then ask what it returns.
 - **Don't ask yes/no questions when they close down thinking** — yes/no questions are fine when the answer *reveals* something, but harmful when the user can answer without thinking; the goal is questions that force the user to construct, not select.
 - **Don't ask the huge question** ("how does authentication work in this codebase?") — huge questions overwhelm and produce vague answers; the next-best *small* question moves the user further because it's where they can take a real step.
 - **Don't cite external knowledge without declaring the brief exit from questions-only mode** — silent assertions look like inferred facts and re-install borrowed confidence under the disguise of a question.
 - **Don't continue questions-only when the user is asking to be told** — if they want explanation and not questions, this is the wrong skill; suggesting a switch to `/explain-and-check` respects their stated need.
 
-## Governing principles (this skill satisfies all five)
+## Governing principles
 
 1. **Agent withholds** — questions-only *is* the extreme form of withholding.
 2. **Student speaks first** — and second, and third, and fourth. The agent only ever asks.
 3. **Artefact is the judge** — the agent reads the real code/docs silently; this shapes the questions, never the assertions.
-4. **Source fidelity** — when an explicit citation request triggers the exit clause, the citation must be accurate and linked to an authoritative source. Policy: [../../docs/sources.md](../../docs/sources.md).
-5. **Exit is a transfer test** — closure is the user constructing the insight themselves, which *is* a transfer demonstration.
+4. **Source fidelity** — when an explicit citation request triggers the exit clause, the citation must be accurate and linked to an authoritative source. Before verifying, read [SOURCES.md](SOURCES.md).
+5. **Transfer and completion** — the user constructs the insight and decides when to stop. This workflow does not separately test transfer to a new problem; do not equate an insight with demonstrated transfer.

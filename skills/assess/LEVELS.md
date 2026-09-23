@@ -8,7 +8,7 @@ Detailed reference for the **Session protocol** of `/assess`. The SKILL.md links
 2. **Recall baseline.** If `/start-learn` recorded a baseline self-assessment, state it. This makes any later delta visible. If no baseline exists, ask the user for one (1–5 self-rating) before starting.
 3. **Project read (topic-mode only).** Read `package.json` / lockfile / `pyproject.toml` for the version in use. Assess against that version, not generic knowledge.
 4. **Ask 4–6 questions of ascending cognitive demand** (see Bloom or SOLO mapping below). Each question targets one level. Stop early if the user fails two consecutive levels.
-5. **Verify each answer against the artefact.** Read the code (Read tool) or docs (WebFetch / context7). Mark each answer **pass / partial / fail**, with the specific divergence noted.
+5. **Verify each answer against the artefact.** Read the code or retrieve the authoritative documentation with available tools. Mark each answer **pass / partial / fail**, with the specific divergence noted.
 6. **Map performance to a level.** Reach a level only when the user passes all questions up to and including it. A partial at level L means the user is at L−1 with a specific gap *toward* L.
 7. **Produce the verdict block** in the exact format below.
 
@@ -31,7 +31,7 @@ Prestructural → Unistructural (one point) → Multistructural (several disconn
 Topic: <topic>
 Scale: Bloom (or SOLO)
 Baseline (from /start-learn): <self-rated 1-5 or "not provided">
-Verified level: <Bloom level name, e.g. "Apply (L3)">
+Verified level: <level on the selected scale, e.g. "Apply (L3)" or "Relational">
 Gaps:
   - <concrete gap 1, with file:line or doc reference>
   - <concrete gap 2>

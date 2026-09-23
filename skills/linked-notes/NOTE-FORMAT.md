@@ -4,7 +4,7 @@ Detailed reference for the note format produced by `/linked-notes`. The SKILL.md
 
 ## File location
 
-Every note file lives at `learn/notes/<kebab-slug>.md`. Slugs are kebab-case, derived from the title. If a slug collides with an existing file, append a numeric suffix (`-2`, `-3`).
+In workspace mode (`CURRICULUM.md` in the current directory), notes live at `notes/<kebab-slug>.md`; otherwise use `learn/notes/<kebab-slug>.md`. Slugs are kebab-case, derived from the title. If a slug collides with an existing file, confirm the new filename with the user and append a numeric suffix (`-2`, `-3`).
 
 ## Note format
 
@@ -14,8 +14,8 @@ title: <single-sentence statement of the idea>
 date: YYYY-MM-DD
 tags: [<topic>, ...]
 links:
-  - [[other-note-slug]]
-  - [[another-note-slug]]
+  - "[[other-note-slug]]"
+  - "[[another-note-slug]]"
 ---
 
 <2–6 sentences in the user's own words. One idea. No more.>

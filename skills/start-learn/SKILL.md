@@ -1,6 +1,6 @@
 ---
 name: start-learn
-description: Entry point to learn-skills. Asks one question — what to learn — then auto-detects Scenario A (understand existing code or topic) or Scenario B (learn from scratch) and acts accordingly. Scenario A: selects and runs the right dialogic skill, declaring the choice. Scenario B: creates a teaching workspace with CURRICULUM.md, HTML lessons, glossary, and resources. Use when the user says "help me start", "I want to learn", "where do I begin", "start-learn", or when invoked without a specific methodology in mind.
+description: "Routes a learning goal to an existing-code workflow or a from-scratch teaching workspace. Use when the user wants to start learning, asks \"where do I begin?\", or has not chosen a learning methodology."
 ---
 
 # Start Learn
@@ -23,6 +23,8 @@ The agent reads the answer, infers Scenario A or B, declares the assumption, and
 
 Read [FLOWS.md](FLOWS.md) for the full detection logic, skill-mapping table (Scenario A), and step-by-step workspace protocol (Scenario B).
 
+For Scenario A, load the selected skill's instructions through the application's skill mechanism and follow them. Command prefixes in examples are illustrative; use the application's supported invocation syntax. If the target skill is unavailable, name the missing dependency and ask the user to install it; do not invent its workflow.
+
 Summary:
 - **Scenario A** — user mentions existing code, file, PR, or wants to deepen a topic with a codebase already in mind → select the right dialogic skill, declare the choice + a one-line reason, and run it. The user can redirect at any time.
 - **Scenario B** — user names a topic they want to learn from zero → create a teaching workspace, generate CURRICULUM.md, produce HTML lessons on demand.
@@ -33,6 +35,8 @@ Always declare the assumption:
 ## Workspace (Scenario B only)
 
 See [WORKSPACE.md](WORKSPACE.md) for the full directory structure, file purposes, and workspace detection rule.
+
+Before generating a requested lesson, read [LESSON-FORMAT.md](LESSON-FORMAT.md) for its HTML structure and practice formats.
 
 The workspace path is chosen by the user in plain text (no tool). Access in subsequent sessions: `cd` into the folder. Detection signal for all workspace-aware skills: presence of `CURRICULUM.md` in cwd.
 
@@ -56,5 +60,5 @@ In both scenarios, state the inferred level explicitly at the end:
 1. **Agent withholds** — withholds *content* (lessons deliver only when requested; sessions make the student speak first). Selects the *methodology* on the user's behalf (ADR 0004) — meta-choice, not content.
 2. **Student speaks first** — all choices (workspace path, curriculum approval, lesson request) originate from the user.
 3. **Artefact is the judge** — Scenario A: reads real code/docs before proposing. Scenario B: every lesson cites a primary source.
-4. **Source fidelity** — web search before content; no parametric knowledge asserted without citation. Policy: [../../docs/sources.md](../../docs/sources.md).
-5. **Exit is a transfer test** — Scenario A: user's confirmation of the next skill is the exit. Scenario B: each lesson ends with a practice section the user completes.
+4. **Source fidelity** — web search before content; no parametric knowledge asserted without citation. Before verifying, read [SOURCES.md](SOURCES.md).
+5. **Exit is a transfer test** — Scenario A: dispatch to the selected skill, whose completion rule governs the learning session. Scenario B: each lesson ends with a practice section the user completes.

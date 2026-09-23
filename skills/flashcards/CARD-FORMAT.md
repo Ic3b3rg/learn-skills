@@ -42,4 +42,4 @@ Generated: YYYY-MM-DD · Stack: <stack + versions>
 ...
 ```
 
-Default file size: **5–15 cards**. Below 5 isn't worth a file; above 15 is fatigue territory in a single session.
+Default file size: **5–15 cards**. This is the workflow's editorial target; the session still stops when the user asks, as specified in `SKILL.md`.

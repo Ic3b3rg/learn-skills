@@ -1,6 +1,6 @@
 ---
 name: linked-notes
-description: Produces atomic, linked markdown notes that capture one idea each, written in the user's own words, and cross-linked by topic. Each note carries a citation to the source artefact (code, docs, prior notes). Use when the user wants to turn a learning session into durable knowledge, when capturing insights from a /explain-and-check or /connect-to-what-you-know session, when "I want notes I can come back to", or anytime they say "save this as notes" or "make me notes".
+description: "Captures the user's ideas as atomic, cited, linked Markdown notes. Use when saving learning insights, turning a session into durable notes, or when the user says \"save this as notes\" or \"make me notes\"."
 ---
 
 # Linked Notes
@@ -38,10 +38,10 @@ See [NOTE-FORMAT.md](NOTE-FORMAT.md) for the exact file location, frontmatter, b
 1. **Project read** (topic-mode). Read `package.json` / lockfile to identify versions. Citations must match the version in use.
 2. **One note at a time.** Ask the user for the first idea they want to capture. Single sentence, declarative, in their own words.
 3. **Atomicity check.** Read what the user wrote. Does it contain more than one idea? If yes, ask which one to capture first; the rest become a queue for follow-up notes.
-4. **Citation check.** For every claim in the note about *external* behaviour (an API behaves this way, a feature works like this), ask the user to supply or accept a citation (`file:line` or doc link). Use Read / WebFetch / context7 to verify the citation is accurate before writing it into the file.
+4. **Citation check.** For every claim in the note about *external* behaviour (an API behaves this way, a feature works like this), ask the user to supply or accept a citation (`file:line` or doc link). Use available file-reading or documentation-retrieval tools to verify the citation is accurate before writing it into the file.
 5. **Wording check.** Compare the body to known docs/code. If it is a near-quote, ask the user to restate. Real notes are paraphrases — paraphrasing is itself an act of learning.
-6. **Link suggestion (gentle).** After writing the note, check `learn/notes/` for existing notes with overlapping tags. Suggest 1–3 candidate links — the user accepts or rejects each. Never auto-link.
-7. **Write the file.** Use the Write tool. Confirm filename and path with the user if it would collide with an existing slug.
+6. **Link suggestion (gentle).** Check the active notes folder (`notes/` in workspace mode, otherwise `learn/notes/`) for existing notes with overlapping tags. Suggest 1–3 candidate links — the user accepts or rejects each. Never auto-link.
+7. **Write the file.** Write the file with the available file-editing tools. Confirm filename and path with the user if it would collide with an existing slug.
 8. **Loop or close.** Ask whether the user wants to capture another idea or close. If close, summarise: *N notes written, M new links."*
 
 ### Linking discipline
@@ -72,10 +72,10 @@ If `CURRICULUM.md` is absent (legacy mode), notes go to `learn/notes/` as before
 - **Don't auto-link based on string match** — always propose, never auto-link; linking choices are the user's because the connections are *their* knowledge graph, not the agent's.
 - **Don't mix atomic notes with raw notes or sketches** — atomic-only is what makes the collection composable; other captures (drafts, outlines, scratch) go elsewhere.
 
-## Governing principles (this skill satisfies all five)
+## Governing principles
 
 1. **Agent withholds** — the agent prompts, checks, formats; never authors body content.
 2. **Student speaks first** — every note is the user's words.
 3. **Artefact is the judge** — every citation verified against the real source before being written.
-4. **Source fidelity** — version anchoring + citation to authoritative sources on every external claim. Policy: [../../docs/sources.md](../../docs/sources.md).
-5. **Exit is a transfer test** — the *paraphrase* requirement (own words, not quotes) is itself a transfer demonstration.
+4. **Source fidelity** — version anchoring + citation to authoritative sources on every external claim. Before verifying, read [SOURCES.md](SOURCES.md).
+5. **Transfer and completion** — the user's paraphrase is evidence of their contribution, not proof of transfer. Save the verified notes and close as specified above; this workflow adds no separate transfer exam.

@@ -1,0 +1,332 @@
+[
+  {
+    "id": "ask-me-questions-positive",
+    "skill": "ask-me-questions",
+    "kind": "positive",
+    "mode": "implicit",
+    "workspace": false,
+    "prompt": "Ask me questions about discount.js so I can reason it out myself. Do not explain it to me.",
+    "checks": [
+      "Asks one focused question.",
+      "Does not reveal a declarative explanation or answer."
+    ]
+  },
+  {
+    "id": "ask-me-questions-negative",
+    "skill": "ask-me-questions",
+    "kind": "negative",
+    "mode": "implicit",
+    "workspace": false,
+    "prompt": "Rename discountedTotal to applyDiscount in discount.js.",
+    "checks": [
+      "Does not activate the questions-only learning workflow for a code edit."
+    ]
+  },
+  {
+    "id": "ask-me-questions-edge",
+    "skill": "ask-me-questions",
+    "kind": "edge",
+    "mode": "explicit",
+    "workspace": false,
+    "prompt": "Use ask-me-questions. Briefly tell me, with a source citation, what default discount is defined in discount.js; then return to questions.",
+    "checks": [
+      "Declares the citation exception.",
+      "Reads the actual code and cites discount.js for the default.",
+      "Resumes one-question-at-a-time dialogue."
+    ]
+  },
+  {
+    "id": "assess-positive",
+    "skill": "assess",
+    "kind": "positive",
+    "mode": "implicit",
+    "workspace": false,
+    "prompt": "Assess my current understanding of discount.js using Bloom levels and concrete gaps.",
+    "checks": [
+      "Selects the assessment workflow.",
+      "Confirms source closure before assessment questions.",
+      "Does not assign a verified level without answers."
+    ]
+  },
+  {
+    "id": "assess-negative",
+    "skill": "assess",
+    "kind": "negative",
+    "mode": "implicit",
+    "workspace": false,
+    "prompt": "Tell me what discount.js exports. I am asking for a code lookup.",
+    "checks": [
+      "Does not turn a code lookup into a formative assessment."
+    ]
+  },
+  {
+    "id": "assess-edge",
+    "skill": "assess",
+    "kind": "edge",
+    "mode": "explicit",
+    "workspace": false,
+    "prompt": "Use assess on discount.js with SOLO. I have closed my sources, and my baseline self-rating is 2/5.",
+    "checks": [
+      "Uses SOLO rather than a Bloom-only question checklist.",
+      "Asks a source-grounded assessment question without providing its answer.",
+      "Does not convert the self-rating into a verified level."
+    ]
+  },
+  {
+    "id": "connect-to-what-you-know-positive",
+    "skill": "connect-to-what-you-know",
+    "kind": "positive",
+    "mode": "implicit",
+    "workspace": false,
+    "prompt": "Help me connect the unfamiliar pattern in discount.js to programming ideas I already know. I want to supply my own analogy.",
+    "checks": [
+      "Selects analogy-based learning.",
+      "Elicits the learner analogy before offering one."
+    ]
+  },
+  {
+    "id": "connect-to-what-you-know-negative",
+    "skill": "connect-to-what-you-know",
+    "kind": "negative",
+    "mode": "implicit",
+    "workspace": false,
+    "prompt": "Find every call to discountedTotal in this directory.",
+    "checks": [
+      "Does not activate analogy coaching for a symbol search."
+    ]
+  },
+  {
+    "id": "connect-to-what-you-know-edge",
+    "skill": "connect-to-what-you-know",
+    "kind": "edge",
+    "mode": "explicit",
+    "workspace": false,
+    "prompt": "Use connect-to-what-you-know. My analogy is that discount.js subtracts the discount from each price, like a fixed coupon. Test that analogy against this code.",
+    "checks": [
+      "Checks the actual computation before endorsing the analogy.",
+      "Surfaces the difference between proportional and fixed reductions with evidence.",
+      "Asks the learner to repair the analogy rather than replacing it with an agent-authored one."
+    ]
+  },
+  {
+    "id": "explain-and-check-positive",
+    "skill": "explain-and-check",
+    "kind": "positive",
+    "mode": "implicit",
+    "workspace": false,
+    "prompt": "An LLM wrote discount.js. I want to explain the execution in my own words so you can check what I really understand.",
+    "checks": [
+      "Frames a concrete execution path.",
+      "Lets the learner explain before supplying the mechanism."
+    ]
+  },
+  {
+    "id": "explain-and-check-negative",
+    "skill": "explain-and-check",
+    "kind": "negative",
+    "mode": "implicit",
+    "workspace": false,
+    "prompt": "Format discount.js with two-space indentation.",
+    "checks": [
+      "Does not start a comprehension interview for formatting."
+    ]
+  },
+  {
+    "id": "explain-and-check-edge",
+    "skill": "explain-and-check",
+    "kind": "edge",
+    "mode": "explicit",
+    "workspace": false,
+    "prompt": "Use explain-and-check on discount.js. Before I trace it, does prices mean cents or euros? I cannot find that convention in this project.",
+    "checks": [
+      "Inspects available source evidence.",
+      "Does not invent a currency-unit convention absent from the fixture.",
+      "Requests the missing convention or states uncertainty without giving the entire trace."
+    ]
+  },
+  {
+    "id": "flashcards-positive",
+    "skill": "flashcards",
+    "kind": "positive",
+    "mode": "implicit",
+    "workspace": false,
+    "prompt": "I want reusable flashcards about discount.js for later practice. Help me phrase what I want to remember.",
+    "checks": [
+      "Asks the user to supply question fronts.",
+      "Does not silently author the fronts or claim a saved deck demonstrates recall."
+    ]
+  },
+  {
+    "id": "flashcards-negative",
+    "skill": "flashcards",
+    "kind": "negative",
+    "mode": "implicit",
+    "workspace": false,
+    "prompt": "Quiz me from memory about discount.js now; I do not want a card file.",
+    "checks": [
+      "Does not activate flashcard generation; recall practice may use quiz-me."
+    ]
+  },
+  {
+    "id": "flashcards-edge",
+    "skill": "flashcards",
+    "kind": "edge",
+    "mode": "explicit",
+    "workspace": true,
+    "prompt": "Use flashcards in this workspace. My five fronts are: What is the exported function called? What is the default discount? Which discount values cause RangeError? What is returned for an empty prices array? What does a discount of 1 do to the total? These are all my cards; save them now.",
+    "checks": [
+      "Reads and cites discount.js for each back.",
+      "Preserves the five supplied atomic fronts and folds answers.",
+      "Writes under flashcards/ and suggests practice using the actual saved path."
+    ]
+  },
+  {
+    "id": "learn-by-doing-positive",
+    "skill": "learn-by-doing",
+    "kind": "positive",
+    "mode": "implicit",
+    "workspace": false,
+    "prompt": "Give me practical exercises on discount.js so I can apply what I studied and bring you my solutions.",
+    "checks": [
+      "Generates three to seven source-grounded exercises.",
+      "Includes the required debug exercise for code mode.",
+      "Hides solutions beneath a details fold."
+    ]
+  },
+  {
+    "id": "learn-by-doing-negative",
+    "skill": "learn-by-doing",
+    "kind": "negative",
+    "mode": "implicit",
+    "workspace": false,
+    "prompt": "Implement a production discount service for this application.",
+    "checks": [
+      "Does not replace an implementation request with a practice worksheet."
+    ]
+  },
+  {
+    "id": "learn-by-doing-edge",
+    "skill": "learn-by-doing",
+    "kind": "edge",
+    "mode": "explicit",
+    "workspace": true,
+    "prompt": "Use learn-by-doing on discount.js in this learning workspace. Generate exactly three exercises for me to attempt.",
+    "checks": [
+      "Reads MISSION.md and uses exercises/ for output.",
+      "Still includes E4 Debug among the three exercises.",
+      "Sources folded solutions; does not claim the learner passed by generating the file."
+    ]
+  },
+  {
+    "id": "linked-notes-positive",
+    "skill": "linked-notes",
+    "kind": "positive",
+    "mode": "implicit",
+    "workspace": true,
+    "prompt": "Help me save what I learned about discount.js as atomic linked notes in my own words.",
+    "checks": [
+      "Asks the user for the idea or wording rather than authoring it.",
+      "Uses notes/ in workspace mode."
+    ]
+  },
+  {
+    "id": "linked-notes-negative",
+    "skill": "linked-notes",
+    "kind": "negative",
+    "mode": "implicit",
+    "workspace": true,
+    "prompt": "Write a polished README explaining this repository for new contributors.",
+    "checks": [
+      "Does not impose learner-authored atomic notes on a documentation-writing request."
+    ]
+  },
+  {
+    "id": "linked-notes-edge",
+    "skill": "linked-notes",
+    "kind": "edge",
+    "mode": "explicit",
+    "workspace": true,
+    "prompt": "Use linked-notes. My title is \"A full discount yields zero\". My body is \"I can multiply the sum by zero. A discount of one makes that happen.\" My why is \"This helps me predict the boundary case.\" Verify against discount.js and save this note. I reject any link to notes/old.md.",
+    "checks": [
+      "Verifies the local code before saving under notes/.",
+      "Preserves the user body and rejects the requested old-note link.",
+      "Leaves notes/old.md unchanged and does not call paraphrase proof of transfer."
+    ]
+  },
+  {
+    "id": "quiz-me-positive",
+    "skill": "quiz-me",
+    "kind": "positive",
+    "mode": "implicit",
+    "workspace": false,
+    "prompt": "Test my recall of discount.js, which I studied yesterday. I still have the file open.",
+    "checks": [
+      "Requests source closure and waits for confirmation.",
+      "Does not ask recall questions before that confirmation."
+    ]
+  },
+  {
+    "id": "quiz-me-negative",
+    "skill": "quiz-me",
+    "kind": "negative",
+    "mode": "implicit",
+    "workspace": false,
+    "prompt": "I have never seen this code. Give me a direct explanation of discount.js.",
+    "checks": [
+      "Does not test prior recall of unseen material."
+    ]
+  },
+  {
+    "id": "quiz-me-edge",
+    "skill": "quiz-me",
+    "kind": "edge",
+    "mode": "explicit",
+    "workspace": false,
+    "prompt": "Use quiz-me on discount.js. I have closed the source. From memory, the function divides the sum by the discount and an omitted discount equals one.",
+    "checks": [
+      "Checks the actual file after the learner attempt.",
+      "Identifies confident incorrect recall using code evidence.",
+      "Uses targeted retry and does not treat recognition after reading as a completed transfer test."
+    ]
+  },
+  {
+    "id": "start-learn-positive",
+    "skill": "start-learn",
+    "kind": "positive",
+    "mode": "implicit",
+    "workspace": false,
+    "prompt": "I want to learn JavaScript from scratch. Help me get started.",
+    "checks": [
+      "Declares the from-scratch scenario.",
+      "Asks for the user-chosen workspace path rather than choosing silently.",
+      "Does not generate a full sequence of lessons immediately."
+    ]
+  },
+  {
+    "id": "start-learn-negative",
+    "skill": "start-learn",
+    "kind": "negative",
+    "mode": "implicit",
+    "workspace": false,
+    "prompt": "Search discount.js for RangeError and return the matching line.",
+    "checks": [
+      "Does not start a learning interview for a source search."
+    ]
+  },
+  {
+    "id": "start-learn-edge",
+    "skill": "start-learn",
+    "kind": "edge",
+    "mode": "explicit",
+    "workspace": false,
+    "prompt": "Use start-learn. I want to test recall of code I studied yesterday.",
+    "checks": [
+      "Declares the intended quiz-me choice and reason.",
+      "Reports the missing installed quiz-me workflow.",
+      "Does not pretend it loaded the missing skill or reconstruct the workflow from memory."
+    ],
+    "install_only": [
+      "start-learn"
+    ]
+  }
+]

@@ -1,6 +1,6 @@
 ---
 name: explain-and-check
-description: Verifies the user's understanding of a piece of code or a topic by making them explain it first, then stress-testing the explanation against the real artefact (code, tests, official documentation). Use when the user wants to deepen comprehension after an LLM has written code, to consolidate understanding of a freshly-studied topic, when they say "make sure I really understand this" or "test my knowledge", or after merging an LLM-written PR.
+description: "Checks the user's explanation of code or a topic against real sources. Use when verifying comprehension after LLM-written code, a merged change, or recent study, or when the user wants to explain something in their own words and find gaps."
 ---
 
 # Explain and Check
@@ -32,14 +32,14 @@ If ambiguous, ask once. Then proceed.
 
 ### Session protocol
 
-1. **Frame with a structural map.** State the mode and the artefact. Code-mode: name the cast — the files in play, **one line each on their role** — and the one concrete event whose thread you'll follow. Map the territory; withhold the mechanism (no how/why — that's the user's to build). Wait for the user to confirm or pick a different event.
+1. **Frame with a structural map.** State the mode and the artefact. Code-mode: inspect files as needed to name the cast — **one line each on their role** — and the one concrete event whose thread you'll follow. Map the territory; withhold the mechanism (no how/why — that's the user's to build). Wait for the user to confirm or pick a different event.
 2. **Project read (topic-mode only).** Read `package.json` / lockfile / `pyproject.toml` / `Gemfile` to identify the version of the topic in use. If the project doesn't pin it, ask the user explicitly. Never assume a default.
 3. **Student speaks first.** Ask the user to explain end-to-end. **Do not** produce your own explanation. **Do not** interrupt. **Do not** validate intermediate parts as they speak. Let them finish.
-4. **Verify against the artefact.** Read the code (Read tool) or docs (WebFetch / context7). Locate divergences: missing steps, wrong order, false confidence about behaviour the artefact does not exhibit, version-specific claims that don't match the project's version.
+4. **Verify against the artefact.** Read the code or retrieve the authoritative documentation with available tools. Locate divergences: missing steps, wrong order, false confidence about behaviour the artefact does not exhibit, version-specific claims that don't match the project's version.
 5. **Surface gaps as questions, never answers.** Never say "you missed X." Ask a question whose correct answer requires X. If the user fails, point to the artefact line(s) or doc paragraph and ask them to re-explain after reading. **Never** fill in the gap yourself.
 6. **Intercept prerequisite gaps, not answers.** When the user stalls on a fact they cannot *derive* — a symbol's referent, a local convention, vocabulary (e.g. `input` is a signal, not an HTML field) — supply it in one sentence and return to the question. Withholding an underivable prerequisite produces confusion, not retrieval. This is the one carve-out to "the agent withholds" (principle 1).
 7. **Cite.** Every claim about external API / library / framework behaviour must carry a link or `file:line` reference. If no source is found, declare uncertainty. **Never** assert from memory.
-8. **Transfer-test exit.** Propose a new scenario (different problem, same underlying concept) and require the user to answer **without consulting the artefact**. The session ends only when they pass.
+8. **Transfer-test exit.** Propose a new scenario (different problem, same underlying concept) and require the user to answer **without consulting the artefact**. They must pass before the final takeaway in step 9.
 9. **Draw the thread (durable takeaway).** Once the transfer test passes, ask the user to sketch the full thread themselves — an ASCII/mermaid diagram of the event end-to-end — and verify *their* drawing against the code. Then offer `/linked-notes` to save it. What they drew is what stays; never hand them a diagram you drew.
 
 ### Code-mode rule — follow the thread
@@ -75,5 +75,5 @@ When the session closes, propose one follow-up:
 1. **Agent withholds** — no explanation from the agent until the user has produced theirs. Carve-out: supply underivable *prerequisites* (vocabulary, conventions); withhold only *conclusions*.
 2. **Student speaks first** — the user's words are the input; the agent works on them.
 3. **Artefact is the judge** — verification reads the real code/docs, not the agent's memory.
-4. **Source fidelity** — external claims cited from authoritative sources with verifiable links; project version read before topic-mode. Policy: [../../docs/sources.md](../../docs/sources.md).
+4. **Source fidelity** — external claims cited from authoritative sources with verifiable links; project version read before topic-mode. Before verifying, read [SOURCES.md](SOURCES.md).
 5. **Exit is a transfer test** — the session ends on a passed new-scenario question, not on "I get it."
